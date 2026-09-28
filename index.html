@@ -639,7 +639,7 @@
             grants, and merchant self-service feed seamlessly into bKash Forest.</p>
         </div>
 
-        <div class="architecture-diagram glass-card">
+        <div class="architecture-diagram glass-card" id="architectureDiagramCard">
           <div class="card-crosshairs" aria-hidden="true">
             <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
             <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
@@ -648,13 +648,26 @@
             <div class="arch-status"><span class="pulse-dot"></span> [ LIVE ARCHITECTURAL TOPOLOGY SIMULATOR ]</div>
             <div class="arch-tabs">
               <button class="arch-tab active" data-flow="all" data-cursor="FILTER">Complete Ecosystem</button>
-              <button class="arch-tab" data-flow="disbursement" data-cursor="FILTER">IDS & G2P EFT Flow</button>
-              <button class="arch-tab" data-flow="forest" data-cursor="FILTER">bKash Forest Green Flow</button>
-              <button class="arch-tab" data-flow="ai" data-cursor="FILTER">Alice Labs Revora AI Flow</button>
+              <button class="arch-tab" data-flow="disbursement" data-cursor="FILTER">⚡ IDS & G2P EFT Flow</button>
+              <button class="arch-tab" data-flow="forest" data-cursor="FILTER">🌲 bKash Forest Green Flow</button>
+              <button class="arch-tab" data-flow="ai" data-cursor="FILTER">🤖 Alice Labs Revora AI Flow</button>
             </div>
           </div>
 
-          <!-- Interactive SVG Neural & Flow Pipeline Lines -->
+          <!-- Architecture Instruction & Sandbox Guide Banner -->
+          <div class="arch-instruction-banner">
+            <div class="arch-banner-left">
+              <span class="arch-pulse-chip"><i class="status-indicator"></i> TOPOLOGY ACTIVE</span>
+              <span class="arch-instruction-text">
+                <strong>INTERACTIVE TOPOLOGY INSPECTOR:</strong> Click any microservice card below or switch flow tabs to trace distributed event routing, live latency benchmarks, and syntax-highlighted JSON payload telemetry in the Inspector Console.
+              </span>
+            </div>
+            <div class="arch-banner-status font-mono">
+              <span class="badge badge-red">[ 6 CLOUD NODES ONLINE ]</span>
+            </div>
+          </div>
+
+          <!-- Interactive SVG Neural & Flow Pipeline Lines with Kinetic Energy Particles -->
           <div class="arch-canvas-wrap">
             <svg class="arch-circuit-svg" id="archCircuitSvg" viewBox="0 0 1000 320" preserveAspectRatio="none">
               <defs>
@@ -679,87 +692,226 @@
                 </filter>
               </defs>
               <!-- Primary Circuit Track 1: Client to Gateway -->
-              <path class="circuit-path path-disburse" id="path-c1" d="M 160 80 L 330 80" stroke="url(#gradRed)"
+              <path class="circuit-path path-disburse active" id="path-c1" d="M 160 80 L 330 80" stroke="url(#gradRed)"
                 stroke-width="2.5" fill="none" stroke-dasharray="6 4" filter="url(#neonGlow)" />
               <!-- Primary Circuit Track 2: Gateway to Engine -->
-              <path class="circuit-path path-disburse" id="path-c2" d="M 490 80 L 660 80" stroke="url(#gradRed)"
+              <path class="circuit-path path-disburse active" id="path-c2" d="M 490 80 L 660 80" stroke="url(#gradRed)"
                 stroke-width="2.5" fill="none" stroke-dasharray="6 4" filter="url(#neonGlow)" />
               <!-- Primary Circuit Track 3: Engine down to Kafka -->
-              <path class="circuit-path path-disburse" id="path-c3" d="M 740 120 L 740 170 L 250 170 L 250 210"
+              <path class="circuit-path path-disburse active" id="path-c3" d="M 740 120 L 740 170 L 250 170 L 250 210"
                 stroke="url(#gradRed)" stroke-width="2" fill="none" stroke-dasharray="5 3" />
               <!-- Primary Circuit Track 4: Kafka to Forest -->
-              <path class="circuit-path path-forest" id="path-c4" d="M 330 250 L 500 250" stroke="url(#gradCrimson)"
+              <path class="circuit-path path-forest active" id="path-c4" d="M 330 250 L 500 250" stroke="url(#gradCrimson)"
                 stroke-width="2.5" fill="none" stroke-dasharray="6 4" filter="url(#neonGlow)" />
               <!-- Primary Circuit Track 5: Gateway to AI -->
-              <path class="circuit-path path-ai" id="path-c5" d="M 410 120 L 410 180 L 750 180 L 750 210"
+              <path class="circuit-path path-ai active" id="path-c5" d="M 410 120 L 410 180 L 750 180 L 750 210"
                 stroke="url(#gradRuby)" stroke-width="2" fill="none" stroke-dasharray="5 3" filter="url(#neonGlow)" />
             </svg>
 
             <div class="arch-nodes-grid">
-              <!-- Node 1 -->
-              <div class="arch-node" id="node-client" data-node="client" data-cursor="PULSE">
-                <div class="node-icon">📱</div>
-                <div class="node-content">
-                  <h4>50M+ User Clients & Corporates</h4>
-                  <p>bKash Mobile App, USSD & Corporate Portals</p>
-                  <span class="node-badge">[ HTTP/3 & mTLS ]</span>
+              <!-- Node 1: User Clients & Ingress -->
+              <div class="arch-node active-inspected" id="node-client" data-node="client" data-cursor="INSPECT" tabindex="0" role="button">
+                <div class="node-header-row">
+                  <div class="node-icon-box">📱</div>
+                  <div class="node-title-group">
+                    <span class="node-status-pill online"><i class="status-indicator"></i> INGRESS ACTIVE</span>
+                    <h4>50M+ User Clients & Ingress</h4>
+                  </div>
+                </div>
+                <p>bKash Mobile App, USSD gateways & Corporate Enterprise Portals.</p>
+                <div class="node-telemetry-metrics">
+                  <div class="n-metric"><span>TRAFFIC</span><strong>48.2K req/s</strong></div>
+                  <div class="n-metric"><span>LATENCY</span><strong>&lt;12ms P99</strong></div>
+                  <div class="n-metric"><span>PROTOCOL</span><strong>HTTP/3 + mTLS</strong></div>
+                </div>
+                <div class="node-footer-meta">
+                  <span class="node-badge">[ iOS / Android / USSD ]</span>
+                  <span class="node-click-hint">INSPECT SPEC →</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
-              <!-- Node 2 -->
-              <div class="arch-node node-highlight-red" id="node-gateway" data-node="gateway" data-cursor="PULSE">
-                <div class="node-icon">🛡️</div>
-                <div class="node-content">
-                  <h4>API Gateway & Self-Service</h4>
-                  <p>Rate Limiting, HMAC Auth, Merchant Verification</p>
-                  <span class="node-badge badge-red">[ Kong / Envoy Gateway ]</span>
+              <!-- Node 2: API Gateway -->
+              <div class="arch-node node-highlight-red" id="node-gateway" data-node="gateway" data-cursor="INSPECT" tabindex="0" role="button">
+                <div class="node-header-row">
+                  <div class="node-icon-box gateway-box">🛡️</div>
+                  <div class="node-title-group">
+                    <span class="node-status-pill online"><i class="status-indicator"></i> 99.999% HEALTH</span>
+                    <h4>API Gateway & Self-Service</h4>
+                  </div>
+                </div>
+                <p>Rate Limiting, HMAC Auth, Merchant Verification & Token Issuance.</p>
+                <div class="node-telemetry-metrics">
+                  <div class="n-metric"><span>AUTH SPEED</span><strong>1.2ms P99</strong></div>
+                  <div class="n-metric"><span>MAX RATE</span><strong>100K/min</strong></div>
+                  <div class="n-metric"><span>SECURITY</span><strong>HMAC-SHA256</strong></div>
+                </div>
+                <div class="node-footer-meta">
+                  <span class="node-badge badge-red">[ Kong / Envoy Proxy ]</span>
+                  <span class="node-click-hint">INSPECT SPEC →</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
-              <!-- Node 3 -->
-              <div class="arch-node node-highlight-red" id="node-engine" data-node="engine" data-cursor="PULSE">
-                <div class="node-icon">💰</div>
-                <div class="node-content">
-                  <h4>IDS & G2P EFT Engine</h4>
-                  <p>Instant & Batch Orchestrator, Sagas</p>
+              <!-- Node 3: IDS & G2P EFT Engine -->
+              <div class="arch-node node-highlight-red" id="node-engine" data-node="engine" data-cursor="INSPECT" tabindex="0" role="button">
+                <div class="node-header-row">
+                  <div class="node-icon-box engine-box">⚡</div>
+                  <div class="node-title-group">
+                    <span class="node-status-pill online"><i class="status-indicator"></i> 5,000 TPS BATCH</span>
+                    <h4>IDS & G2P EFT Engine</h4>
+                  </div>
+                </div>
+                <p>Instant & Batch Disbursement Orchestrator, Distributed Sagas & Bank Sync.</p>
+                <div class="node-telemetry-metrics">
+                  <div class="n-metric"><span>THROUGHPUT</span><strong>5,000 TPS</strong></div>
+                  <div class="n-metric"><span>IDEMPOTENCY</span><strong>100% Zero-Loss</strong></div>
+                  <div class="n-metric"><span>REPLICAS</span><strong>16 Clustered Pods</strong></div>
+                </div>
+                <div class="node-footer-meta">
                   <span class="node-badge badge-red">[ Go / Java Spring Boot ]</span>
+                  <span class="node-click-hint">INSPECT SPEC →</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
-              <!-- Node 4 -->
-              <div class="arch-node" id="node-kafka" data-node="kafka" data-cursor="PULSE">
-                <div class="node-icon">🔄</div>
-                <div class="node-content">
-                  <h4>Kafka Event Fabric</h4>
-                  <p>High-Throughput Partitioned Event Stream</p>
+              <!-- Node 4: Kafka Event Fabric -->
+              <div class="arch-node" id="node-kafka" data-node="kafka" data-cursor="INSPECT" tabindex="0" role="button">
+                <div class="node-header-row">
+                  <div class="node-icon-box kafka-box">🔄</div>
+                  <div class="node-title-group">
+                    <span class="node-status-pill online"><i class="status-indicator"></i> 0.00ms LAG</span>
+                    <h4>Kafka Event Fabric</h4>
+                  </div>
+                </div>
+                <p>Partitioned Transaction Stream with Distributed Pub/Sub Messaging.</p>
+                <div class="node-telemetry-metrics">
+                  <div class="n-metric"><span>PARTITIONS</span><strong>32 Topics Sync</strong></div>
+                  <div class="n-metric"><span>CONSUMER LAG</span><strong>0.00ms Zero Lag</strong></div>
+                  <div class="n-metric"><span>RETENTION</span><strong>7 Days WAL</strong></div>
+                </div>
+                <div class="node-footer-meta">
                   <span class="node-badge">[ Kafka Broker Cluster ]</span>
+                  <span class="node-click-hint">INSPECT SPEC →</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
-              <!-- Node 5 -->
-              <div class="arch-node node-highlight-crimson" id="node-forest" data-node="forest" data-cursor="PULSE">
-                <div class="node-icon">🌿</div>
-                <div class="node-content">
-                  <h4>bKash Forest Engine (Team Lead)</h4>
-                  <p>Eco-Gamification, Tree Planting & CO₂ Ledger</p>
+              <!-- Node 5: bKash Forest Green Engine -->
+              <div class="arch-node node-highlight-crimson" id="node-forest" data-node="forest" data-cursor="INSPECT" tabindex="0" role="button">
+                <div class="node-header-row">
+                  <div class="node-icon-box forest-box">🌿</div>
+                  <div class="node-title-group">
+                    <span class="node-status-pill online"><i class="status-indicator"></i> 1.2M+ TREES</span>
+                    <h4>bKash Forest Engine (Team Lead)</h4>
+                  </div>
+                </div>
+                <p>Eco-Gamification, Real-Time Carbon Offset & GIS Geo-ledger Sync.</p>
+                <div class="node-telemetry-metrics">
+                  <div class="n-metric"><span>TREES PLANTED</span><strong>1.2M+ Verified</strong></div>
+                  <div class="n-metric"><span>CO₂ OFFSET</span><strong>+30,000 Tons</strong></div>
+                  <div class="n-metric"><span>GIS SYNC</span><strong>Real-Time Geo</strong></div>
+                </div>
+                <div class="node-footer-meta">
                   <span class="node-badge badge-crimson">[ Green FinTech Microservice ]</span>
+                  <span class="node-click-hint">INSPECT SPEC →</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
-              <!-- Node 6 -->
-              <div class="arch-node node-highlight-ruby" id="node-ai" data-node="ai" data-cursor="PULSE">
-                <div class="node-icon">🤖</div>
-                <div class="node-content">
-                  <h4>Alice Labs Revora AI Builder</h4>
-                  <p>NLP Intent Classifier & WhatsApp Bridge</p>
+              <!-- Node 6: Alice Labs Revora AI -->
+              <div class="arch-node node-highlight-ruby" id="node-ai" data-node="ai" data-cursor="INSPECT" tabindex="0" role="button">
+                <div class="node-header-row">
+                  <div class="node-icon-box ai-box">🤖</div>
+                  <div class="node-title-group">
+                    <span class="node-status-pill online"><i class="status-indicator"></i> 10M+ DIALOGUES</span>
+                    <h4>Alice Labs Revora AI Builder</h4>
+                  </div>
+                </div>
+                <p>NLP Intent Classifier, Multi-Turn Dialogue Trees & WhatsApp Bridge.</p>
+                <div class="node-telemetry-metrics">
+                  <div class="n-metric"><span>INFERENCE</span><strong>18ms / Query</strong></div>
+                  <div class="n-metric"><span>ACCURACY</span><strong>99.4% Match</strong></div>
+                  <div class="n-metric"><span>CHANNELS</span><strong>WhatsApp + Web</strong></div>
+                </div>
+                <div class="node-footer-meta">
                   <span class="node-badge badge-ruby">[ Python / Transformers ]</span>
+                  <span class="node-click-hint">INSPECT SPEC →</span>
                 </div>
                 <div class="node-pulse-halo"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Node Inspector & Live Telemetry Payload Console -->
+          <div class="arch-inspector-panel" id="archInspectorPanel">
+            <div class="inspector-header">
+              <div class="inspector-header-left">
+                <span class="inspector-dot"></span>
+                <span class="inspector-title font-mono" id="inspectorTitle">[ NODE INSPECTOR: 50M+ User Clients & Ingress ]</span>
+              </div>
+              <div class="inspector-header-right">
+                <span class="inspector-tag" id="inspectorClusterTag">CLUSTER: #DHAKA-CORE-01</span>
+                <button class="inspector-pulse-btn" id="btnPulseCurrentNode" data-cursor="PULSE" title="Inject simulated test load into this microservice">⚡ PULSE NODE</button>
+              </div>
+            </div>
+
+            <div class="inspector-grid">
+              <!-- Left: Microservice Architecture & Stack Specs -->
+              <div class="inspector-spec-col" id="inspectorSpecCol">
+                <div class="spec-role-box">
+                  <span class="spec-lbl">MICROSERVICE ROLE</span>
+                  <p class="spec-desc" id="inspectorRoleDesc">Ingress layer serving 50M+ bKash consumer app clients, USSD telco gateways, and merchant web portals with zero-trust mTLS encryption.</p>
+                </div>
+
+                <div class="spec-metrics-grid">
+                  <div class="spec-stat-card">
+                    <span class="s-lbl">THROUGHPUT</span>
+                    <strong class="s-val text-red" id="inspectorThroughput">48,200 req/s</strong>
+                  </div>
+                  <div class="spec-stat-card">
+                    <span class="s-lbl">P99 LATENCY</span>
+                    <strong class="s-val text-crimson" id="inspectorLatency">11.8ms</strong>
+                  </div>
+                  <div class="spec-stat-card">
+                    <span class="s-lbl">POD REPLICAS</span>
+                    <strong class="s-val text-ruby" id="inspectorReplicas">24 Pods (HPA)</strong>
+                  </div>
+                  <div class="spec-stat-card">
+                    <span class="s-lbl">AVAILABILITY</span>
+                    <strong class="s-val text-forest" id="inspectorUptime">99.999% SLA</strong>
+                  </div>
+                </div>
+
+                <div class="spec-stack-row">
+                  <span class="spec-lbl">TECHNOLOGY STACK:</span>
+                  <div class="spec-tech-pills" id="inspectorTechPills">
+                    <span class="tech-pill">HTTP/3</span>
+                    <span class="tech-pill">mTLS</span>
+                    <span class="tech-pill">Envoy</span>
+                    <span class="tech-pill">Kubernetes</span>
+                    <span class="tech-pill">Go Ingress</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Real-Time JSON Payload Telemetry Stream -->
+              <div class="inspector-payload-col">
+                <div class="payload-topbar">
+                  <span class="payload-lbl font-mono">LIVE CLUSTER JSON TELEMETRY STREAM</span>
+                  <span class="payload-status"><i class="pulse-indicator"></i> 200 OK</span>
+                </div>
+                <pre class="payload-screen font-mono" id="inspectorPayloadScreen"><code>{
+  "node_id": "node-client-ingress",
+  "cluster": "DHAKA-CORE-NODE-01",
+  "active_sessions": 1428500,
+  "ingress_rate_rps": 48200,
+  "protocol": "HTTP/3_QUIC_mTLS",
+  "p99_latency_ms": 11.8,
+  "gateway_route": "/api/v2/disbursement/instant",
+  "encryption": "TLS_AES_256_GCM_SHA384",
+  "health_status": "HEALTHY_OPTIMAL"
+}</code></pre>
               </div>
             </div>
           </div>
@@ -773,6 +925,7 @@
             <div class="arch-benchmark font-mono">
               <span>BENCHMARK: <strong>&lt; 45ms P99 Latency</strong></span>
               <span>IDEMPOTENCY: <strong>100% Guaranteed</strong></span>
+              <span>NATIONAL TPS: <strong>5,000 TPS Batch</strong></span>
             </div>
           </div>
         </div>
@@ -985,48 +1138,190 @@
           </div>
         </div>
 
-        <!-- Interactive Live Simulation & Card Popping Station -->
-        <div class="interactive-simulator-panel glass-card">
+        <!-- Interactive Live Simulation & Production Telemetry Console -->
+        <div class="interactive-simulator-panel glass-card" id="eventSimulatorPanel">
           <div class="card-crosshairs" aria-hidden="true">
             <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
             <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
           </div>
+          
           <div class="sim-panel-header">
             <div class="sim-header-left">
               <span class="pulse-dot"></span>
               <span class="mono-label">[ LIVE EVENT SIMULATOR · CLICK TO POP TELEMETRY CARDS ]</span>
             </div>
-            <span class="badge badge-red">[ GSAP KINETIC PHYSICS ]</span>
+            <div class="sim-header-right">
+              <span class="sim-status-chip online"><i class="status-indicator"></i> LIVE PIPELINE ACTIVE</span>
+              <span class="badge badge-red">[ 60FPS GSAP SPRINGS ]</span>
+            </div>
           </div>
-          <div class="sim-controls-grid">
-            <button class="sim-btn sim-btn-disburse" id="btnPopDisburse" data-cursor="POP">
-              <span class="sim-btn-icon">⚡</span>
-              <div class="sim-btn-text">
-                <strong data-scramble>Pop IDS 5,000 TPS Batch</strong>
-                <small>Simulate instant funds disbursement</small>
+
+          <!-- Interactive Sandbox Instructions & Quick Action Bar -->
+          <div class="sim-guide-banner">
+            <div class="sim-guide-left">
+              <div class="sim-guide-icon-box">⚡</div>
+              <div class="sim-guide-text">
+                <span class="guide-lead">INTERACTIVE TELEMETRY LAB:</span>
+                <span class="guide-body">Click any card below or press keyboard keys <kbd class="kbd-hint">1</kbd> <kbd class="kbd-hint">2</kbd> <kbd class="kbd-hint">3</kbd> <kbd class="kbd-hint">4</kbd> to pop kinetic 3D cards across the screen while live financial packets stream through the console in real-time.</span>
               </div>
-            </button>
-            <button class="sim-btn sim-btn-forest" id="btnPopForest" data-cursor="POP">
-              <span class="sim-btn-icon">🌲</span>
-              <div class="sim-btn-text">
-                <strong data-scramble>Pop bKash Forest Batch</strong>
-                <small>Simulate +500 verified trees planted</small>
+            </div>
+            <div class="sim-guide-actions">
+              <button class="sim-quick-btn" data-sim-trigger="disburse" data-cursor="DISPATCH" title="Press 1 or click to dispatch 5K TPS batch">⚡ 5K TPS <span class="btn-kbd">1</span></button>
+              <button class="sim-quick-btn" data-sim-trigger="forest" data-cursor="RECORD" title="Press 2 or click to credit +500 trees">🌲 Forest <span class="btn-kbd">2</span></button>
+              <button class="sim-quick-btn" data-sim-trigger="ai" data-cursor="ROUTE" title="Press 3 or click to simulate NLP intent">🤖 AI NLP <span class="btn-kbd">3</span></button>
+              <button class="sim-quick-btn cascade-quick-btn" data-sim-trigger="cascade" data-cursor="CASCADE" title="Press 4 or click to launch 3-card cascade">💥 Cascade All <span class="btn-kbd">4</span></button>
+            </div>
+          </div>
+
+          <div class="sim-split-layout">
+            <!-- Left: Interactive Trigger Cards -->
+            <div class="sim-triggers-col">
+              <!-- Trigger 1: IDS Batch -->
+              <div class="sim-trigger-card" id="btnPopDisburse" data-cursor="DISPATCH" tabindex="0" role="button" aria-label="Dispatch 5,000 TPS Batch">
+                <div class="trigger-top">
+                  <div class="trigger-icon-box disburse-icon">⚡</div>
+                  <div class="trigger-info">
+                    <div class="trigger-tag-row">
+                      <span class="trigger-tag tag-red">[ bKash IDS / G2P EFT ]</span>
+                      <span class="card-hotkey">KEY 1</span>
+                    </div>
+                    <h4 class="trigger-title" data-scramble>Dispatch 5,000 TPS Batch</h4>
+                  </div>
+                </div>
+                <p class="trigger-desc">Broadcast instant fund disbursement across 50,000 recipient digital wallets with zero-loss idempotent ledger sync.</p>
+                
+                <div class="trigger-meter-wrap">
+                  <div class="meter-info"><span>THROUGHPUT CAPACITY</span><span>5,000 TPS</span></div>
+                  <div class="meter-track"><div class="meter-fill fill-red" style="width: 92%;"></div></div>
+                </div>
+
+                <div class="trigger-meta-row">
+                  <span class="t-stat">LATENCY: <strong>34ms P99</strong></span>
+                  <span class="trigger-action-btn">CLICK TO FIRE PACKET ↗</span>
+                </div>
               </div>
-            </button>
-            <button class="sim-btn sim-btn-ai" id="btnPopAI" data-cursor="POP">
-              <span class="sim-btn-icon">🤖</span>
-              <div class="sim-btn-text">
-                <strong data-scramble>Pop Revora AI Dialogue</strong>
-                <small>Simulate NLP WhatsApp intent match</small>
+
+              <!-- Trigger 2: bKash Forest -->
+              <div class="sim-trigger-card" id="btnPopForest" data-cursor="RECORD" tabindex="0" role="button" aria-label="Credit +500 Verified Trees">
+                <div class="trigger-top">
+                  <div class="trigger-icon-box forest-icon">🌲</div>
+                  <div class="trigger-info">
+                    <div class="trigger-tag-row">
+                      <span class="trigger-tag tag-crimson">[ bKash Forest (Team Lead) ]</span>
+                      <span class="card-hotkey">KEY 2</span>
+                    </div>
+                    <h4 class="trigger-title" data-scramble>Credit +500 Verified Trees</h4>
+                  </div>
+                </div>
+                <p class="trigger-desc">Trigger eco-gamification micro-transaction reward, credit verified GIS geo-coordinates, and compute carbon offset.</p>
+                
+                <div class="trigger-meter-wrap">
+                  <div class="meter-info"><span>ECO CONVERSION</span><span>+12.4 Tons CO₂</span></div>
+                  <div class="meter-track"><div class="meter-fill fill-forest" style="width: 86%;"></div></div>
+                </div>
+
+                <div class="trigger-meta-row">
+                  <span class="t-stat">CARBON OFFSET: <strong>+12.4 Tons CO₂</strong></span>
+                  <span class="trigger-action-btn">CLICK TO FIRE PACKET ↗</span>
+                </div>
               </div>
-            </button>
-            <button class="sim-btn sim-btn-chaos" id="btnPopCascade" data-cursor="CASCADE">
-              <span class="sim-btn-icon">✨</span>
-              <div class="sim-btn-text">
-                <strong data-scramble>Pop Multi-Card Cascade</strong>
-                <small>Launch full 3D card trajectory wave</small>
+
+              <!-- Trigger 3: Revora AI Dialogue -->
+              <div class="sim-trigger-card" id="btnPopAI" data-cursor="ROUTE" tabindex="0" role="button" aria-label="Simulate WhatsApp NLP Intent">
+                <div class="trigger-top">
+                  <div class="trigger-icon-box ai-icon">🤖</div>
+                  <div class="trigger-info">
+                    <div class="trigger-tag-row">
+                      <span class="trigger-tag tag-ruby">[ Alice Labs · Revora AI ]</span>
+                      <span class="card-hotkey">KEY 3</span>
+                    </div>
+                    <h4 class="trigger-title" data-scramble>Simulate WhatsApp NLP Intent</h4>
+                  </div>
+                </div>
+                <p class="trigger-desc">Route high-volume customer conversational query through multi-turn visual chatbot transformer graph in under 25ms.</p>
+                
+                <div class="trigger-meter-wrap">
+                  <div class="meter-info"><span>NLP INFERENCE SPEED</span><span>18ms Match</span></div>
+                  <div class="meter-track"><div class="meter-fill fill-ruby" style="width: 95%;"></div></div>
+                </div>
+
+                <div class="trigger-meta-row">
+                  <span class="t-stat">ACCURACY: <strong>99.4% NLP Match</strong></span>
+                  <span class="trigger-action-btn">CLICK TO FIRE PACKET ↗</span>
+                </div>
               </div>
-            </button>
+
+              <!-- Trigger 4: Chaos Multi-Card Cascade -->
+              <div class="sim-trigger-card cascade-trigger" id="btnPopCascade" data-cursor="CASCADE" tabindex="0" role="button" aria-label="Broadcast Multi-Service Wave">
+                <div class="trigger-top">
+                  <div class="trigger-icon-box cascade-icon">✨</div>
+                  <div class="trigger-info">
+                    <div class="trigger-tag-row">
+                      <span class="trigger-tag tag-wine">[ FULL ECOSYSTEM CASCADE ]</span>
+                      <span class="card-hotkey">KEY 4</span>
+                    </div>
+                    <h4 class="trigger-title" data-scramble>Broadcast Multi-Service Wave</h4>
+                  </div>
+                </div>
+                <p class="trigger-desc">Simultaneously dispatch IDS financial settlement, GIS green planting, and conversational AI packets across 3 viewport vectors.</p>
+                
+                <div class="trigger-meter-wrap">
+                  <div class="meter-info"><span>MULTI-VECTOR FLIGHT</span><span>3 Vector Burst</span></div>
+                  <div class="meter-track"><div class="meter-fill fill-cascade" style="width: 100%;"></div></div>
+                </div>
+
+                <div class="trigger-meta-row">
+                  <span class="t-stat">CONCURRENCY: <strong>3 Simultaneous Cards</strong></span>
+                  <span class="trigger-action-btn">LAUNCH CASCADE ↗</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Live Streaming Console & Telemetry Gauges -->
+            <div class="sim-terminal-col">
+              <!-- Live Telemetry Mini Dashboard -->
+              <div class="terminal-stats-bar">
+                <div class="term-stat-item">
+                  <span class="term-lbl">CURRENT TPS</span>
+                  <span class="term-val text-red" id="liveTpsCounter">4,820 TPS</span>
+                </div>
+                <div class="term-stat-item">
+                  <span class="term-lbl">P99 LATENCY</span>
+                  <span class="term-val text-crimson" id="liveLatencyGauge">28.4ms</span>
+                </div>
+                <div class="term-stat-item">
+                  <span class="term-lbl">ACTIVE CARDS</span>
+                  <span class="term-val text-ruby" id="liveActiveCardsCount">0 ACTIVE</span>
+                </div>
+              </div>
+
+              <!-- MacOS/Cyber Styled Terminal Box -->
+              <div class="cyber-terminal-box">
+                <div class="terminal-topbar">
+                  <div class="term-window-dots">
+                    <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+                  </div>
+                  <span class="term-window-title font-mono">telemetry_stream.log — bKash Kernel</span>
+                  
+                  <div class="term-topbar-controls">
+                    <button class="term-ctrl-btn" id="toggleSoundBtn" title="Toggle audio sound effects">🔊 SFX: ON</button>
+                    <button class="term-ctrl-btn" id="toggleStreamBtn" title="Toggle live auto-streaming">⚡ AUTO: ON</button>
+                    <button class="term-clear-btn" id="clearTerminalBtn" title="Clear console (or press C)">CLEAR</button>
+                  </div>
+                </div>
+                
+                <div class="terminal-screen font-mono" id="simTerminalScreen" role="log" aria-live="polite">
+                  <div class="term-line sys-line"><span class="term-time">[00:00:01]</span> <span class="term-sys">[KERNEL_INIT]</span> FinTech event bus listener initialized on cluster #DHAKA-NODE-01</div>
+                  <div class="term-line sys-line"><span class="term-time">[00:00:02]</span> <span class="term-sys">[KAFKA_STREAM]</span> 32 partitioned topics subscribed. Ready for live event injection.</div>
+                  <div class="term-line info-line"><span class="term-time">[00:00:03]</span> <span class="term-info">[READY]</span> Click any card on the left or press keys 1, 2, 3, 4 to launch live telemetry packets.</div>
+                </div>
+
+                <div class="terminal-footer">
+                  <span class="term-live-pulse"><i class="pulse-indicator"></i> LISTENING ON PORT 443 (mTLS SECURED)</span>
+                  <span class="term-packet-count font-mono" id="simPacketCount">PACKETS EMITTED: 03</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

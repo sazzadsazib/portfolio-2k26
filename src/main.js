@@ -638,7 +638,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // 8. Interactive Simulator Panel & Action Buttons
+    // 8. Interactive Simulator Panel, Guide Banner, Triggers & Terminal
     const simPanel = q('.interactive-simulator-panel');
     if (simPanel) {
       gsap.timeline({
@@ -649,20 +649,32 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       })
       .from(simPanel, {
-        scale: 0.92,
+        scale: 0.94,
         y: 35,
         opacity: 0,
         duration: 0.8,
         ease: 'power3.out'
       })
-      .from('.sim-btn', {
-        scale: 0.8,
+      .from('.sim-guide-banner', {
+        y: 15,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, '-=0.4')
+      .from('.sim-trigger-card', {
+        scale: 0.92,
         y: 20,
         opacity: 0,
         stagger: 0.08,
+        duration: 0.6,
+        ease: 'back.out(1.6)'
+      }, '-=0.3')
+      .from('.sim-terminal-col', {
+        x: 25,
+        opacity: 0,
         duration: 0.65,
-        ease: 'back.out(1.8)'
-      }, '-=0.4');
+        ease: 'power2.out'
+      }, '-=0.5');
     }
 
     // 9. Contact Card & Action Boxes Reveal
@@ -739,7 +751,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================================
-  // 06. ARCHITECTURE FLOW SIMULATOR & SVG CIRCUIT ENERGY
+  // 06. ARCHITECTURE FLOW SIMULATOR & INTERACTIVE NODE INSPECTOR
   // ==========================================================================
   // Infinite circuit pulse dash offset loop
   gsap.to('.circuit-path', {
@@ -749,6 +761,174 @@ window.addEventListener('DOMContentLoaded', () => {
     ease: 'none'
   });
 
+  const nodeSpecs = {
+    client: {
+      title: '[ NODE INSPECTOR: 50M+ User Clients & Ingress ]',
+      cluster: 'CLUSTER: #DHAKA-INGRESS-01',
+      desc: 'High-concurrency ingress layer serving 50M+ bKash consumer mobile apps, USSD telco sessions, and merchant web portals with zero-trust mTLS encryption.',
+      throughput: '48,200 req/s',
+      latency: '11.8ms P99',
+      replicas: '24 Pods (HPA)',
+      uptime: '99.999% SLA',
+      tech: ['HTTP/3 (QUIC)', 'mTLS', 'Envoy Proxy', 'Kubernetes HPA', 'Go Ingress'],
+      payload: {
+        node_id: "node-client-ingress",
+        cluster: "DHAKA-INGRESS-NODE-01",
+        active_sessions: 1428500,
+        ingress_rate_rps: 48200,
+        protocol: "HTTP/3_QUIC_mTLS",
+        p99_latency_ms: 11.8,
+        gateway_route: "/api/v2/disbursement/instant",
+        encryption: "TLS_AES_256_GCM_SHA384",
+        health_status: "HEALTHY_OPTIMAL"
+      }
+    },
+    gateway: {
+      title: '[ NODE INSPECTOR: API Gateway & Merchant Self-Service ]',
+      cluster: 'CLUSTER: #DHAKA-GATEWAY-02',
+      desc: 'Edge security cluster enforcing HMAC signature verification, merchant token verification, distributed rate-limiting, and instant merchant self-service onboarding.',
+      throughput: '32,500 req/s',
+      latency: '1.2ms P99',
+      replicas: '18 Pods (K8s)',
+      uptime: '99.999% SLA',
+      tech: ['Kong Gateway', 'Envoy', 'HMAC-SHA256', 'Redis Cluster', 'OAuth 2.0 / JWT'],
+      payload: {
+        node_id: "node-api-gateway",
+        cluster: "DHAKA-GATEWAY-02",
+        auth_engine: "HMAC_SHA256_STRICT",
+        rate_limit_bucket: "100K_PER_MINUTE",
+        auth_latency_ms: 1.2,
+        merchant_onboarding_speed: "1.4s_OCR_SYNC",
+        active_connections: 84200,
+        health_status: "HEALTHY_OPTIMAL"
+      }
+    },
+    engine: {
+      title: '[ NODE INSPECTOR: IDS & G2P EFT Batch Engine ]',
+      cluster: 'CLUSTER: #DHAKA-FINTECH-CORE',
+      desc: 'National disbursement engine executing high-throughput batch payments (5,000 TPS) with distributed Sagas, zero-loss idempotent ledgers, and automated bank network clearing.',
+      throughput: '5,000 TPS Batch',
+      latency: '34.2ms P99',
+      replicas: '16 Clustered Pods',
+      uptime: '99.999% SLA',
+      tech: ['Java Spring Boot', 'Go Sagas', 'PostgreSQL Partitioning', 'Redis Sentinel', 'mTLS gRPC'],
+      payload: {
+        node_id: "node-ids-engine",
+        cluster: "DHAKA-FINTECH-CORE",
+        batch_mode: "INSTANT_DISBURSEMENT_5K_TPS",
+        saga_state: "IDEMPOTENT_COMMITTED",
+        p99_latency_ms: 34.2,
+        settlement_loss_rate: "0.0000% (ZERO_LOSS)",
+        bank_clearing_route: "BEFTN_NPSB_EFT_DIRECT",
+        health_status: "HEALTHY_OPTIMAL"
+      }
+    },
+    kafka: {
+      title: '[ NODE INSPECTOR: Kafka Partitioned Event Fabric ]',
+      cluster: 'CLUSTER: #DHAKA-KAFKA-CLUSTER',
+      desc: 'Distributed messaging backbone streaming transactions across 32 partitioned topics, decoupling high-velocity disbursement from eco-gamification and AI inference.',
+      throughput: '85,000 msg/s',
+      latency: '0.4ms P99',
+      replicas: '3x Sync Replicas',
+      uptime: '99.999% SLA',
+      tech: ['Apache Kafka', 'Schema Registry', 'Zookeeper / KRaft', 'Snappy Compression', 'WAL Logs'],
+      payload: {
+        node_id: "node-kafka-fabric",
+        cluster: "DHAKA-KAFKA-CLUSTER",
+        partition_count: 32,
+        consumer_lag: "0.00ms (ZERO_LAG)",
+        throughput_msg_per_sec: 85000,
+        replication_factor: 3,
+        retention_window_days: 7,
+        health_status: "HEALTHY_OPTIMAL"
+      }
+    },
+    forest: {
+      title: '[ NODE INSPECTOR: bKash Forest Green Ledger Engine ]',
+      cluster: 'CLUSTER: #DHAKA-ECO-GREEN',
+      desc: 'Eco-sustainability microservice gamifying fintech transactions into 1.2M+ real-world planted trees with real-time carbon offset accounting and GIS spatial verification (Team Lead).',
+      throughput: '12,400 events/s',
+      latency: '8.4ms P99',
+      replicas: '8 Clustered Pods',
+      uptime: '99.995% SLA',
+      tech: ['Go Microservice', 'PostGIS', 'Redis Geohash', 'Kafka Consumer', 'Docker / K8s'],
+      payload: {
+        node_id: "node-bkash-forest",
+        cluster: "DHAKA-ECO-GREEN",
+        trees_planted_total: 1248920,
+        carbon_offset_tons: 30420.5,
+        geo_zone_active: "BANGLADESH_GIS_DISTRICTS",
+        gamification_reward_loop: "ACTIVE_STREAMING",
+        lead_engineer: "Md. Sazzadul Islam (Sazib)",
+        health_status: "HEALTHY_OPTIMAL"
+      }
+    },
+    ai: {
+      title: '[ NODE INSPECTOR: Alice Labs Revora AI Chatbot Builder ]',
+      cluster: 'CLUSTER: #SINGAPORE-AI-NODE',
+      desc: 'Conversational NLP transformer pipeline routing millions of monthly WhatsApp dialogues with automated multi-turn visual graph routing and <25ms intent matching.',
+      throughput: '3,800 dialog/s',
+      latency: '18.2ms P99',
+      replicas: '12 GPU/CPU Pods',
+      uptime: '99.99% SLA',
+      tech: ['Python / PyTorch', 'Transformers NLP', 'WhatsApp Cloud API', 'FastAPI', 'Redis Cache'],
+      payload: {
+        node_id: "node-revora-ai-builder",
+        cluster: "SINGAPORE-AI-NODE",
+        dialogue_turn_latency_ms: 18.2,
+        intent_match_accuracy: "99.4%",
+        channels_supported: ["WhatsApp_Business", "Web_Widget", "Messenger"],
+        active_conversations_monthly: 10200000,
+        health_status: "HEALTHY_OPTIMAL"
+      }
+    }
+  };
+
+  let currentNodeKey = 'client';
+
+  function inspectArchitectureNode(nodeKey) {
+    if (!nodeSpecs[nodeKey]) return;
+    currentNodeKey = nodeKey;
+    const spec = nodeSpecs[nodeKey];
+
+    // Highlight active card
+    qa('.arch-node').forEach((n) => {
+      if (n.getAttribute('data-node') === nodeKey) {
+        n.classList.add('active-inspected');
+      } else {
+        n.classList.remove('active-inspected');
+      }
+    });
+
+    const inspectorTitle = q('#inspectorTitle');
+    const inspectorClusterTag = q('#inspectorClusterTag');
+    const inspectorRoleDesc = q('#inspectorRoleDesc');
+    const inspectorThroughput = q('#inspectorThroughput');
+    const inspectorLatency = q('#inspectorLatency');
+    const inspectorReplicas = q('#inspectorReplicas');
+    const inspectorUptime = q('#inspectorUptime');
+    const inspectorTechPills = q('#inspectorTechPills');
+    const inspectorPayloadScreen = q('#inspectorPayloadScreen');
+
+    if (inspectorTitle) inspectorTitle.textContent = spec.title;
+    if (inspectorClusterTag) inspectorClusterTag.textContent = spec.cluster;
+    if (inspectorRoleDesc) inspectorRoleDesc.textContent = spec.desc;
+    if (inspectorThroughput) inspectorThroughput.textContent = spec.throughput;
+    if (inspectorLatency) inspectorLatency.textContent = spec.latency;
+    if (inspectorReplicas) inspectorReplicas.textContent = spec.replicas;
+    if (inspectorUptime) inspectorUptime.textContent = spec.uptime;
+
+    if (inspectorTechPills) {
+      inspectorTechPills.innerHTML = spec.tech.map((t) => `<span class="tech-pill">${t}</span>`).join('');
+    }
+
+    if (inspectorPayloadScreen) {
+      inspectorPayloadScreen.innerHTML = `<code>${JSON.stringify(spec.payload, null, 2)}</code>`;
+      gsap.fromTo(inspectorPayloadScreen, { opacity: 0.4, y: 3 }, { opacity: 1, y: 0, duration: 0.25 });
+    }
+  }
+
+  // Flow Tabs Filter
   qa('.arch-tab').forEach((tab) => {
     tab.addEventListener('click', () => {
       qa('.arch-tab').forEach((t) => t.classList.remove('active'));
@@ -808,88 +988,227 @@ window.addEventListener('DOMContentLoaded', () => {
           p.classList.add('active');
         }
       });
+
+      // Auto-inspect primary flow node
+      if (flow === 'disbursement') inspectArchitectureNode('engine');
+      else if (flow === 'forest') inspectArchitectureNode('forest');
+      else if (flow === 'ai') inspectArchitectureNode('ai');
+      else inspectArchitectureNode('client');
     });
   });
 
-  // Click any node to trigger pulse wave and pop a live node telemetry card
+  // Click any node to inspect and trigger pulse wave
   qa('.arch-node').forEach((node) => {
     node.addEventListener('click', () => {
-      gsap.fromTo(node, { scale: 0.95 }, { scale: 1.05, duration: 0.4, yoyo: true, repeat: 1, ease: 'back.out(2)' });
+      gsap.fromTo(node, { scale: 0.96 }, { scale: 1.04, duration: 0.35, yoyo: true, repeat: 1, ease: 'back.out(2)' });
       node.classList.add('node-pulse-active');
-      setTimeout(() => node.classList.remove('node-pulse-active'), 1800);
+      setTimeout(() => node.classList.remove('node-pulse-active'), 1600);
 
       const nodeId = node.getAttribute('data-node');
-      if (nodeId === 'client') {
-        popTelemetryCard({
-          title: '50M+ User Mobile & USSD Gateway',
-          badge: 'CLIENT TRAFFIC',
-          badgeClass: 'disburse',
-          desc: 'High-concurrency ingress from bKash App, USSD gateways, and Merchant APIs with mTLS verification.',
-          metricLbl: 'INGRESS RATE',
-          metricVal: '48,200 req/sec',
-          hash: `tx_${Math.random().toString(36).substring(2, 9)}_client`
-        });
-      } else if (nodeId === 'gateway') {
-        popTelemetryCard({
-          title: 'API Gateway & Self-Service',
-          badge: 'SECURITY & ROUTING',
-          badgeClass: 'disburse',
-          desc: 'Automated HMAC signature checks, merchant self-service authentication, and rate limiting.',
-          metricLbl: 'AUTH LATENCY',
-          metricVal: '1.2ms (P99)',
-          hash: `gw_auth_${Math.random().toString(36).substring(2, 9)}`
-        });
-      } else if (nodeId === 'engine') {
-        popTelemetryCard({
-          title: 'IDS & G2P EFT Batch Engine',
-          badge: 'FINTECH CORE',
-          badgeClass: 'disburse',
-          desc: 'Zero-loss idempotent transaction execution with distributed Saga state machine.',
-          metricLbl: 'THROUGHPUT',
-          metricVal: '5,000 TPS Batch',
-          hash: `ids_batch_${Math.random().toString(36).substring(2, 9)}`
-        });
-      } else if (nodeId === 'forest') {
-        popTelemetryCard({
-          title: 'bKash Forest Green Ledger',
-          badge: 'GREEN FINTECH',
-          badgeClass: 'forest',
-          desc: 'Real-time carbon offset accounting and GIS verified tree planting reward loops.',
-          metricLbl: 'TOTAL IMPACT',
-          metricVal: '1.2M+ Planted',
-          hash: `eco_gis_${Math.random().toString(36).substring(2, 9)}`
-        });
-      } else if (nodeId === 'ai') {
-        popTelemetryCard({
-          title: 'Alice Labs Revora AI Builder',
-          badge: 'REVORA AI',
-          badgeClass: 'ai',
-          desc: 'Natural Language Processing intent classifier with multi-turn WhatsApp conversation graphs.',
-          metricLbl: 'ACCURACY',
-          metricVal: '98.7% Intent Match',
-          hash: `revora_ai_${Math.random().toString(36).substring(2, 9)}`
-        });
-      } else if (nodeId === 'kafka') {
-        popTelemetryCard({
-          title: 'Kafka Partitioned Event Fabric',
-          badge: 'EVENT STREAM',
-          badgeClass: 'disburse',
-          desc: 'Distributed messaging backbone decoupling financial transactions from reward calculations.',
-          metricLbl: 'PARTITION LAG',
-          metricVal: '0.00ms Zero Lag',
-          hash: `kafka_topic_${Math.random().toString(36).substring(2, 9)}`
-        });
+      if (nodeId) {
+        inspectArchitectureNode(nodeId);
       }
     });
   });
 
+  // Pulse Current Node Button
+  const btnPulseCurrentNode = q('#btnPulseCurrentNode');
+  if (btnPulseCurrentNode) {
+    btnPulseCurrentNode.addEventListener('click', () => {
+      const activeNodeEl = q(`#node-${currentNodeKey}`);
+      if (activeNodeEl) {
+        gsap.fromTo(activeNodeEl, { scale: 0.92 }, { scale: 1.06, duration: 0.4, yoyo: true, repeat: 1, ease: 'back.out(2.5)' });
+        activeNodeEl.classList.add('node-pulse-active');
+        setTimeout(() => activeNodeEl.classList.remove('node-pulse-active'), 1800);
+      }
+
+      // Pop corresponding live telemetry packet
+      const spec = nodeSpecs[currentNodeKey];
+      if (spec) {
+        popTelemetryCard({
+          title: spec.title.replace(/\[ NODE INSPECTOR: | \]/g, ''),
+          badge: spec.cluster,
+          badgeClass: currentNodeKey === 'forest' ? 'forest' : currentNodeKey === 'ai' ? 'ai' : 'disburse',
+          desc: spec.desc,
+          metricLbl: 'THROUGHPUT / LATENCY',
+          metricVal: `${spec.throughput} · ${spec.latency}`,
+          hash: `spec_${Math.random().toString(36).substring(2, 9).toUpperCase()}`
+        });
+      }
+    });
+  }
+
   // ==========================================================================
-  // 07. "POP CARD FROM ANYWHERE TO ANYWHERE" INTERACTIVE ENGINE
+  // 07. "POP CARD FROM ANYWHERE TO ANYWHERE" & PRODUCTION EVENT SIMULATOR
   // ==========================================================================
   const popStage = q('#popCardStage');
+  const simTerminalScreen = q('#simTerminalScreen');
+  const simPacketCount = q('#simPacketCount');
+  const liveTpsCounter = q('#liveTpsCounter');
+  const liveLatencyGauge = q('#liveLatencyGauge');
+  const liveActiveCardsCount = q('#liveActiveCardsCount');
+  const toggleSoundBtn = q('#toggleSoundBtn');
+  const toggleStreamBtn = q('#toggleStreamBtn');
+  const clearTerminalBtn = q('#clearTerminalBtn');
 
+  let activeCardCount = 0;
+  let packetCounter = 3;
+  let soundEnabled = true;
+  let autoStreamActive = true;
+  let audioCtx = null;
+
+  // Web Audio Synthesizer (Zero-dependency sci-fi / fintech audio feedback)
+  function playSynthBlip(type = 'default') {
+    if (!soundEnabled) return;
+    try {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      if (!audioCtx) return;
+
+      const now = audioCtx.currentTime;
+      if (type === 'disburse') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(580, now);
+        osc.frequency.exponentialRampToValueAtTime(1180, now + 0.12);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      } else if (type === 'forest') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.start(now);
+        osc.stop(now + 0.19);
+      } else if (type === 'ai') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(1400, now + 0.08);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.start(now);
+        osc.stop(now + 0.13);
+      } else if (type === 'cascade') {
+        [600, 900, 1300].forEach((freq, i) => {
+          const subOsc = audioCtx.createOscillator();
+          const subGain = audioCtx.createGain();
+          subOsc.connect(subGain);
+          subGain.connect(audioCtx.destination);
+          const t = now + i * 0.07;
+          subOsc.type = 'sine';
+          subOsc.frequency.setValueAtTime(freq, t);
+          subGain.gain.setValueAtTime(0.09, t);
+          subGain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+          subOsc.start(t);
+          subOsc.stop(t + 0.13);
+        });
+      } else if (type === 'clear') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(200, now + 0.1);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.start(now);
+        osc.stop(now + 0.13);
+      }
+    } catch (e) {
+      // Audio autoplay policy / unsupported fallback
+    }
+  }
+
+  function updateActiveCardsDisplay() {
+    if (liveActiveCardsCount) {
+      liveActiveCardsCount.textContent = `${activeCardCount} ACTIVE`;
+      liveActiveCardsCount.style.color = activeCardCount > 0 ? '#ff1e42' : 'var(--muted)';
+    }
+  }
+
+  function spikeMetrics(tpsBase = 5000, latencyBase = 28) {
+    if (liveTpsCounter) {
+      const spikeTps = Math.floor(tpsBase + (Math.random() - 0.3) * 600);
+      liveTpsCounter.textContent = `${spikeTps.toLocaleString()} TPS`;
+      liveTpsCounter.style.color = '#ff1e42';
+      setTimeout(() => {
+        if (liveTpsCounter) liveTpsCounter.style.color = '';
+      }, 400);
+    }
+    if (liveLatencyGauge) {
+      const jitterLat = (latencyBase + (Math.random() - 0.5) * 8).toFixed(1);
+      liveLatencyGauge.textContent = `${jitterLat}ms`;
+    }
+  }
+
+  function logToTerminal(category, tag, message) {
+    if (!simTerminalScreen) return;
+
+    packetCounter++;
+    if (simPacketCount) {
+      simPacketCount.textContent = `PACKETS EMITTED: ${packetCounter.toString().padStart(2, '0')}`;
+    }
+
+    const timeStr = new Date().toTimeString().split(' ')[0];
+    const line = document.createElement('div');
+    line.className = `term-line event-${category}`;
+    line.innerHTML = `<span class="term-time">[${timeStr}]</span> <span class="term-sys">[${tag}]</span> ${message}`;
+
+    simTerminalScreen.appendChild(line);
+
+    // Keep max 25 lines
+    while (simTerminalScreen.children.length > 25) {
+      simTerminalScreen.removeChild(simTerminalScreen.firstChild);
+    }
+
+    simTerminalScreen.scrollTop = simTerminalScreen.scrollHeight;
+  }
+
+  // Background Telemetry Streamer (Keeps console dynamic & alive)
+  const simulatedEvents = [
+    { cat: 'stream', tag: 'FINTECH_TXN', msg: 'bKash Merchant Settlement #MS-77182 processed (৳62,400) · Kafka Partition #09' },
+    { cat: 'stream', tag: 'GIS_SYNC', msg: 'bKash Forest user tree seed planted at Lat 23.8103, Lon 90.4125 (CO₂ -0.02kg)' },
+    { cat: 'stream', tag: 'REVORA_NLP', msg: 'WhatsApp query session #WA-9042 intent parsed in 16ms (Confidence: 99.8%)' },
+    { cat: 'stream', tag: 'G2P_EFT', msg: 'Government stipend batch #BD-2026-88 disbursed to 1,840 recipient digital wallets' },
+    { cat: 'stream', tag: 'CLUSTER_HEARTBEAT', msg: 'Dhaka Core Cluster Node #02 OK · Latency: 0.72ms · Zero Dropped Packets' },
+    { cat: 'stream', tag: 'SELF_SERVICE', msg: 'Merchant Instant Onboarding eKYC OCR verified in 1.4s · Token issued' }
+  ];
+  let streamIdx = 0;
+
+  setInterval(() => {
+    if (!autoStreamActive) return;
+    const evt = simulatedEvents[streamIdx % simulatedEvents.length];
+    streamIdx++;
+    logToTerminal(evt.cat, evt.tag, evt.msg);
+    spikeMetrics(4820, 28);
+  }, 3400);
+
+  // Pop Telemetry Card Engine
   function popTelemetryCard(options = {}) {
     if (!popStage) return;
+
+    activeCardCount++;
+    updateActiveCardsDisplay();
 
     const card = document.createElement('div');
     card.className = 'telemetry-pop-card glass-card';
@@ -905,7 +1224,7 @@ window.addEventListener('DOMContentLoaded', () => {
     card.innerHTML = `
       <div class="pop-card-header">
         <span class="pop-card-badge ${badgeClass}">${badge}</span>
-        <button class="pop-card-close" aria-label="Dismiss card">&times;</button>
+        <button class="pop-card-close" aria-label="Dismiss card" title="Dismiss card">&times;</button>
       </div>
       <h4 class="pop-card-title">${title}</h4>
       <p class="pop-card-desc">${desc}</p>
@@ -913,7 +1232,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <span>${metricLbl}</span>
         <span>${metricVal}</span>
       </div>
-      <div class="pop-card-hash">ID: ${hash} · ${new Date().toLocaleTimeString()}</div>
+      <div class="pop-card-hash">ID: ${hash} · ${new Date().toLocaleTimeString()} (Click to dismiss)</div>
     `;
 
     popStage.appendChild(card);
@@ -963,7 +1282,13 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    let dismissed = false;
     const dismissCard = () => {
+      if (dismissed) return;
+      dismissed = true;
+      activeCardCount = Math.max(0, activeCardCount - 1);
+      updateActiveCardsDisplay();
+
       const exitOrigins = [
         { x: -400, y: targetY + (Math.random() - 0.5) * 200, rot: -35 },
         { x: window.innerWidth + 400, y: targetY + (Math.random() - 0.5) * 200, rot: 35 },
@@ -998,14 +1323,19 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 6800);
   }
 
-  // Interactive Live Simulation Buttons
-  const btnPopDisburse = q('#btnPopDisburse');
-  const btnPopForest = q('#btnPopForest');
-  const btnPopAI = q('#btnPopAI');
-  const btnPopCascade = q('#btnPopCascade');
+  // Unified Simulation Trigger Router
+  function triggerSimulation(actionType) {
+    playSynthBlip(actionType);
+    spikeMetrics(actionType === 'disburse' ? 5200 : actionType === 'cascade' ? 5400 : 4900, 24);
 
-  if (btnPopDisburse) {
-    btnPopDisburse.addEventListener('click', () => {
+    const triggerEl = q(`#btnPop${actionType.charAt(0).toUpperCase() + actionType.slice(1)}`);
+    if (triggerEl) {
+      triggerEl.classList.add('is-firing');
+      setTimeout(() => triggerEl.classList.remove('is-firing'), 400);
+    }
+
+    if (actionType === 'disburse') {
+      logToTerminal('disburse', 'IDS_BATCH_EMITTED', '⚡ 5,000 TPS instant distribution batch dispatched across 50,000 digital wallets (34ms P99)');
       popTelemetryCard({
         title: '⚡ IDS 5,000 TPS Batch Settlement',
         badge: 'bKash IDS / G2P EFT',
@@ -1015,11 +1345,8 @@ window.addEventListener('DOMContentLoaded', () => {
         metricVal: '34ms · 5,000 TPS',
         hash: `ids_${Math.random().toString(36).substring(2, 9).toUpperCase()}`
       });
-    });
-  }
-
-  if (btnPopForest) {
-    btnPopForest.addEventListener('click', () => {
+    } else if (actionType === 'forest') {
+      logToTerminal('forest', 'FOREST_TREES_CREDITED', '🌲 +500 Verified Trees credited to eco-ledger. Geo-zone #DHAKA-48 (+12.4 Tons CO₂ offset computed)');
       popTelemetryCard({
         title: '🌲 bKash Forest +500 Verified Trees',
         badge: 'bKash Forest (Team Lead)',
@@ -1029,11 +1356,8 @@ window.addEventListener('DOMContentLoaded', () => {
         metricVal: '+12.4 Tons CO₂',
         hash: `forest_${Math.random().toString(36).substring(2, 9).toUpperCase()}`
       });
-    });
-  }
-
-  if (btnPopAI) {
-    btnPopAI.addEventListener('click', () => {
+    } else if (actionType === 'ai') {
+      logToTerminal('ai', 'REVORA_NLP_INFERRED', '🤖 Natural Language intent parsed in 18ms. Multi-turn WhatsApp dialogue tree routed (99.4% match)');
       popTelemetryCard({
         title: '🤖 Revora AI WhatsApp Multi-Turn Dialogue',
         badge: 'Alice Labs (Revora AI)',
@@ -1043,12 +1367,8 @@ window.addEventListener('DOMContentLoaded', () => {
         metricVal: '99.4% NLP Match',
         hash: `revora_${Math.random().toString(36).substring(2, 9).toUpperCase()}`
       });
-    });
-  }
-
-  if (btnPopCascade) {
-    btnPopCascade.addEventListener('click', () => {
-      // Launch 3 cards from alternating corners simultaneously
+    } else if (actionType === 'cascade') {
+      logToTerminal('cascade', 'TRI_VECTOR_CASCADE', '💥 BROADCASTING FULL ECOSYSTEM WAVE: IDS settlement + Forest GIS + Revora NLP simultaneously');
       setTimeout(() => {
         popTelemetryCard({
           title: '💰 Payroll & G2P EFT Grant Distributed',
@@ -1071,7 +1391,7 @@ window.addEventListener('DOMContentLoaded', () => {
           metricVal: 'Bangladesh GIS',
           hash: `eco_${Math.random().toString(36).substring(2, 8)}`
         });
-      }, 220);
+      }, 200);
 
       setTimeout(() => {
         popTelemetryCard({
@@ -1083,14 +1403,80 @@ window.addEventListener('DOMContentLoaded', () => {
           metricVal: 'WhatsApp + Web',
           hash: `ai_${Math.random().toString(36).substring(2, 8)}`
         });
-      }, 440);
+      }, 400);
+    }
+  }
+
+  // Interactive Live Simulation Buttons & Cards
+  const btnPopDisburse = q('#btnPopDisburse');
+  const btnPopForest = q('#btnPopForest');
+  const btnPopAI = q('#btnPopAI');
+  const btnPopCascade = q('#btnPopCascade');
+
+  if (btnPopDisburse) btnPopDisburse.addEventListener('click', () => triggerSimulation('disburse'));
+  if (btnPopForest) btnPopForest.addEventListener('click', () => triggerSimulation('forest'));
+  if (btnPopAI) btnPopAI.addEventListener('click', () => triggerSimulation('ai'));
+  if (btnPopCascade) btnPopCascade.addEventListener('click', () => triggerSimulation('cascade'));
+
+  // Quick Action Buttons in Banner
+  qa('[data-sim-trigger]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const type = btn.getAttribute('data-sim-trigger');
+      if (type) triggerSimulation(type);
+    });
+  });
+
+  // Terminal Controls
+  if (toggleSoundBtn) {
+    toggleSoundBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      toggleSoundBtn.textContent = soundEnabled ? '🔊 SFX: ON' : '🔇 SFX: OFF';
+      toggleSoundBtn.classList.toggle('off', !soundEnabled);
+      if (soundEnabled) playSynthBlip('disburse');
     });
   }
+
+  if (toggleStreamBtn) {
+    toggleStreamBtn.addEventListener('click', () => {
+      autoStreamActive = !autoStreamActive;
+      toggleStreamBtn.textContent = autoStreamActive ? '⚡ AUTO: ON' : '⏸️ AUTO: PAUSED';
+      toggleStreamBtn.classList.toggle('off', !autoStreamActive);
+    });
+  }
+
+  if (clearTerminalBtn) {
+    clearTerminalBtn.addEventListener('click', () => {
+      playSynthBlip('clear');
+      if (simTerminalScreen) {
+        simTerminalScreen.innerHTML = '';
+        logToTerminal('stream', 'CONSOLE_RESET', 'Console buffer cleared. Telemetry listeners active on port 443.');
+      }
+    });
+  }
+
+  // Keyboard Shortcuts (1, 2, 3, 4, C)
+  window.addEventListener('keydown', (e) => {
+    // Avoid triggering when user is focused in an input or textarea
+    const tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea') return;
+
+    if (e.key === '1') {
+      triggerSimulation('disburse');
+    } else if (e.key === '2') {
+      triggerSimulation('forest');
+    } else if (e.key === '3') {
+      triggerSimulation('ai');
+    } else if (e.key === '4') {
+      triggerSimulation('cascade');
+    } else if (e.key.toLowerCase() === 'c' && !e.ctrlKey && !e.metaKey) {
+      if (clearTerminalBtn) clearTerminalBtn.click();
+    }
+  });
 
   // ==========================================================================
   // 08. SELECTIVE 3D MAGNETIC CARD TILT & SPECULAR SHEEN (KEY SHOWCASE CARDS)
   // ==========================================================================
-  const selectiveTiltCards = qa('.project-showcase, .arch-node, #heroScopeCard, .telemetry-pop-card, .tilt-highlight, .impact-stat-box');
+  const selectiveTiltCards = qa('.project-showcase, .arch-node, #heroScopeCard, .telemetry-pop-card, .tilt-highlight, .impact-stat-box, .sim-trigger-card');
 
   selectiveTiltCards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
@@ -1114,7 +1500,7 @@ window.addEventListener('DOMContentLoaded', () => {
         rotateX,
         rotateY,
         transformPerspective: 1000,
-        scale: 1.03,
+        scale: 1.025,
         duration: 0.35,
         ease: 'power2.out',
         overwrite: 'auto'
@@ -1134,7 +1520,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // Magnetic Button Cursor Pull Micro-Interactions
-  qa('.btn-primary, .btn-glass, .sim-btn').forEach((btn) => {
+  qa('.btn-primary, .btn-glass, .sim-quick-btn, .term-ctrl-btn, .term-clear-btn').forEach((btn) => {
     btn.addEventListener('mousemove', (e) => {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
