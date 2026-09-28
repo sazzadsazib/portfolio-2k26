@@ -535,39 +535,25 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 5. Architecture Simulator Diagram & Topology Nodes Staggered Pop
+    // 5. Architecture Blueprint Diagram & Nodes Staggered Pop
     const archDiag = q('.architecture-diagram');
     if (archDiag) {
       const archTl = gsap.timeline({
         scrollTrigger: {
           trigger: archDiag,
-          start: 'top 80%',
+          start: 'top 92%',
           toggleActions: 'play none none none'
         }
       });
 
       archTl.from(archDiag, {
-        scale: 0.92,
-        y: 45,
+        scale: 0.96,
+        y: 35,
         opacity: 0,
-        duration: 0.85,
-        ease: 'power3.out'
-      })
-      .from('.circuit-path', {
-        strokeDashoffset: 120,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.9,
-        ease: 'power2.out'
-      }, '-=0.5')
-      .from('.arch-node', {
-        scale: 0.72,
-        y: 30,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.7,
-        ease: 'back.out(2)'
-      }, '-=0.6');
+        duration: 0.75,
+        ease: 'power3.out',
+        clearProps: 'opacity,transform,scale'
+      });
     }
 
     // 6. Skills Grid Wave Pop-in with Dynamic Scale
@@ -751,307 +737,240 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================================
-  // 06. ARCHITECTURE FLOW SIMULATOR & INTERACTIVE NODE INSPECTOR
+  // 06. DISTRIBUTED SYSTEM ARCHITECTURE BLUEPRINT CONTROLLER
   // ==========================================================================
-  // Infinite circuit pulse dash offset loop
-  gsap.to('.circuit-path', {
-    strokeDashoffset: -40,
-    duration: 1.8,
-    repeat: -1,
-    ease: 'none'
-  });
-
-  const nodeSpecs = {
-    client: {
-      title: '[ NODE INSPECTOR: 50M+ User Clients & Ingress ]',
-      cluster: 'CLUSTER: #DHAKA-INGRESS-01',
-      desc: 'High-concurrency ingress layer serving 50M+ bKash consumer mobile apps, USSD telco sessions, and merchant web portals with zero-trust mTLS encryption.',
-      throughput: '48,200 req/s',
-      latency: '11.8ms P99',
-      replicas: '24 Pods (HPA)',
-      uptime: '99.999% SLA',
-      tech: ['HTTP/3 (QUIC)', 'mTLS', 'Envoy Proxy', 'Kubernetes HPA', 'Go Ingress'],
-      payload: {
-        node_id: "node-client-ingress",
-        cluster: "DHAKA-INGRESS-NODE-01",
-        active_sessions: 1428500,
-        ingress_rate_rps: 48200,
-        protocol: "HTTP/3_QUIC_mTLS",
-        p99_latency_ms: 11.8,
-        gateway_route: "/api/v2/disbursement/instant",
-        encryption: "TLS_AES_256_GCM_SHA384",
-        health_status: "HEALTHY_OPTIMAL"
-      }
-    },
-    gateway: {
-      title: '[ NODE INSPECTOR: API Gateway & Merchant Self-Service ]',
-      cluster: 'CLUSTER: #DHAKA-GATEWAY-02',
-      desc: 'Edge security cluster enforcing HMAC signature verification, merchant token verification, distributed rate-limiting, and instant merchant self-service onboarding.',
-      throughput: '32,500 req/s',
-      latency: '1.2ms P99',
-      replicas: '18 Pods (K8s)',
-      uptime: '99.999% SLA',
-      tech: ['Kong Gateway', 'Envoy', 'HMAC-SHA256', 'Redis Cluster', 'OAuth 2.0 / JWT'],
-      payload: {
-        node_id: "node-api-gateway",
-        cluster: "DHAKA-GATEWAY-02",
-        auth_engine: "HMAC_SHA256_STRICT",
-        rate_limit_bucket: "100K_PER_MINUTE",
-        auth_latency_ms: 1.2,
-        merchant_onboarding_speed: "1.4s_OCR_SYNC",
-        active_connections: 84200,
-        health_status: "HEALTHY_OPTIMAL"
-      }
-    },
-    engine: {
-      title: '[ NODE INSPECTOR: IDS & G2P EFT Batch Engine ]',
-      cluster: 'CLUSTER: #DHAKA-FINTECH-CORE',
-      desc: 'National disbursement engine executing high-throughput batch payments (5,000 TPS) with distributed Sagas, zero-loss idempotent ledgers, and automated bank network clearing.',
-      throughput: '5,000 TPS Batch',
-      latency: '34.2ms P99',
-      replicas: '16 Clustered Pods',
-      uptime: '99.999% SLA',
-      tech: ['Java Spring Boot', 'Go Sagas', 'PostgreSQL Partitioning', 'Redis Sentinel', 'mTLS gRPC'],
-      payload: {
-        node_id: "node-ids-engine",
-        cluster: "DHAKA-FINTECH-CORE",
-        batch_mode: "INSTANT_DISBURSEMENT_5K_TPS",
-        saga_state: "IDEMPOTENT_COMMITTED",
-        p99_latency_ms: 34.2,
-        settlement_loss_rate: "0.0000% (ZERO_LOSS)",
-        bank_clearing_route: "BEFTN_NPSB_EFT_DIRECT",
-        health_status: "HEALTHY_OPTIMAL"
-      }
-    },
-    kafka: {
-      title: '[ NODE INSPECTOR: Kafka Partitioned Event Fabric ]',
-      cluster: 'CLUSTER: #DHAKA-KAFKA-CLUSTER',
-      desc: 'Distributed messaging backbone streaming transactions across 32 partitioned topics, decoupling high-velocity disbursement from eco-gamification and AI inference.',
-      throughput: '85,000 msg/s',
-      latency: '0.4ms P99',
-      replicas: '3x Sync Replicas',
-      uptime: '99.999% SLA',
-      tech: ['Apache Kafka', 'Schema Registry', 'Zookeeper / KRaft', 'Snappy Compression', 'WAL Logs'],
-      payload: {
-        node_id: "node-kafka-fabric",
-        cluster: "DHAKA-KAFKA-CLUSTER",
-        partition_count: 32,
-        consumer_lag: "0.00ms (ZERO_LAG)",
-        throughput_msg_per_sec: 85000,
-        replication_factor: 3,
-        retention_window_days: 7,
-        health_status: "HEALTHY_OPTIMAL"
-      }
+  const architectureBlueprints = {
+    disbursement: {
+      badge: '[ FINTECH CORE · bKash Limited ]',
+      badgeClass: 'badge-red',
+      scope: 'NATIONAL SCALE · HIGH CONCURRENCY',
+      title: 'IDS & G2P EFT Instant Disbursement Engine',
+      desc: 'Engineered high-throughput batch and instant disbursement infrastructure handling national social safety net (G2P), government stipends, and corporate payroll batching. Orchestrates distributed transactions with 100% idempotent guarantees and automated multi-bank settlement clearing.',
+      highlights: [
+        { icon: '⚡', title: 'Distributed Saga Orchestration', desc: 'Compensating transactions handle multi-bank network partitions with zero balance inconsistencies.' },
+        { icon: '🔒', title: 'Idempotent Key Deduplication', desc: 'Distributed Redis Cluster locks guarantee strict exactly-once payment processing.' },
+        { icon: '🚀', title: '5,000 TPS Batch Concurrency', desc: 'Multi-threaded Go & Java microservices process massive disbursement files in minutes.' },
+        { icon: '🛡️', title: 'Automated Bank Reconciliation', desc: 'Seamless clearing integration with BEFTN, NPSB, and core fintech banking ledgers.' }
+      ],
+      tech: ['Go', 'Java Spring Boot', 'Apache Kafka', 'PostgreSQL', 'Redis Sentinel', 'Kubernetes', 'mTLS gRPC'],
+      metrics: {
+        lbl1: 'PEAK THROUGHPUT', val1: '5,000+ TPS',
+        lbl2: 'P99 LATENCY', val2: '<35ms P99',
+        lbl3: 'DATA INTEGRITY', val3: '100% Zero-Loss',
+        lbl4: 'SLA AVAILABILITY', val4: '99.999% Uptime'
+      },
+      activeNodes: ['node-engine', 'node-gateway', 'node-client', 'node-kafka']
     },
     forest: {
-      title: '[ NODE INSPECTOR: bKash Forest Green Ledger Engine ]',
-      cluster: 'CLUSTER: #DHAKA-ECO-GREEN',
-      desc: 'Eco-sustainability microservice gamifying fintech transactions into 1.2M+ real-world planted trees with real-time carbon offset accounting and GIS spatial verification (Team Lead).',
-      throughput: '12,400 events/s',
-      latency: '8.4ms P99',
-      replicas: '8 Clustered Pods',
-      uptime: '99.995% SLA',
-      tech: ['Go Microservice', 'PostGIS', 'Redis Geohash', 'Kafka Consumer', 'Docker / K8s'],
-      payload: {
-        node_id: "node-bkash-forest",
-        cluster: "DHAKA-ECO-GREEN",
-        trees_planted_total: 1248920,
-        carbon_offset_tons: 30420.5,
-        geo_zone_active: "BANGLADESH_GIS_DISTRICTS",
-        gamification_reward_loop: "ACTIVE_STREAMING",
-        lead_engineer: "Md. Sazzadul Islam (Sazib)",
-        health_status: "HEALTHY_OPTIMAL"
-      }
+      badge: '[ GREEN PLATFORM · Team Lead ]',
+      badgeClass: 'badge-crimson',
+      scope: 'ESG FINTECH · GIS GEO-LEDGER',
+      title: 'bKash Forest Green Gamification Engine (Team Lead)',
+      desc: 'Led end-to-end engineering of bKash Forest, converting micro-transaction financial actions into 1.2M+ verified trees planted across Bangladesh. Architected real-time GIS spatial verification, carbon offset telemetry, and automated eco-reward loops with zero impact on payment latency.',
+      highlights: [
+        { icon: '🌲', title: '1.2M+ Verified Trees Planted', desc: 'Automated micro-incentive loops tied directly to daily fintech transactions.' },
+        { icon: '🌍', title: 'Spatial GIS Geo-Ledger', desc: 'PostGIS integration tags tree coordinates and satellite survivability telemetry.' },
+        { icon: '🔄', title: 'Real-Time Kafka Event Ingestion', desc: 'Decoupled consumer streams consume transaction events without slowing checkout.' },
+        { icon: '📊', title: '+30,000 Tons CO₂ Offset', desc: 'Live carbon sequestration telemetry audited against environmental standards.' }
+      ],
+      tech: ['Go Microservices', 'PostGIS', 'Redis Geohash', 'Apache Kafka', 'Docker / Kubernetes', 'GIS Telemetry'],
+      metrics: {
+        lbl1: 'TREES VERIFIED', val1: '1.2M+ Planted',
+        lbl2: 'CO₂ SEQUESTERED', val2: '+30,000 Tons',
+        lbl3: 'STREAM RATE', val3: '12.4K event/s',
+        lbl4: 'GIS RESOLUTION', val4: 'Real-Time Geo'
+      },
+      activeNodes: ['node-forest', 'node-kafka', 'node-client', 'node-engine']
+    },
+    gateway: {
+      badge: '[ INGRESS SECURITY · bKash Limited ]',
+      badgeClass: 'badge-red',
+      scope: 'EDGE DEFENSE · ZERO-TRUST ARCHITECTURE',
+      title: 'High-Availability API Gateway & Merchant Self-Service',
+      desc: 'Architected the high-concurrency ingress cluster protecting core banking microservices. Features automated merchant self-service onboarding, HMAC-SHA256 signature verification, dynamic sliding-window rate limiting, and mTLS zero-trust communication.',
+      highlights: [
+        { icon: '🛡️', title: 'Sub-1.5ms HMAC Verification', desc: 'Hardware-accelerated signature validation with cryptographic replay prevention.' },
+        { icon: '⚡', title: 'Dynamic Sliding-Window Rate Limiter', desc: 'Redis-backed token bucket isolates misbehaving clients during flash spikes.' },
+        { icon: '🏢', title: 'Merchant Self-Service Engine', desc: 'Automated merchant KYC, OCR document parsing, and instant sandbox credentials.' },
+        { icon: '🔐', title: 'Zero-Trust mTLS Fabric', desc: 'Strict mutual TLS encryption across every pod-to-pod microservice communication.' }
+      ],
+      tech: ['Kong Gateway', 'Envoy Proxy', 'HMAC-SHA256', 'Redis Cluster', 'Kubernetes HPA', 'OAuth 2.0 / JWT'],
+      metrics: {
+        lbl1: 'INGRESS RATE', val1: '48,200 req/s',
+        lbl2: 'AUTH LATENCY', val2: '1.2ms P99',
+        lbl3: 'BURST CAPACITY', val3: '100K / min',
+        lbl4: 'SLA AVAILABILITY', val4: '99.999% SLA'
+      },
+      activeNodes: ['node-gateway', 'node-client', 'node-engine']
     },
     ai: {
-      title: '[ NODE INSPECTOR: Alice Labs Revora AI Chatbot Builder ]',
-      cluster: 'CLUSTER: #SINGAPORE-AI-NODE',
-      desc: 'Conversational NLP transformer pipeline routing millions of monthly WhatsApp dialogues with automated multi-turn visual graph routing and <25ms intent matching.',
-      throughput: '3,800 dialog/s',
-      latency: '18.2ms P99',
-      replicas: '12 GPU/CPU Pods',
-      uptime: '99.99% SLA',
-      tech: ['Python / PyTorch', 'Transformers NLP', 'WhatsApp Cloud API', 'FastAPI', 'Redis Cache'],
-      payload: {
-        node_id: "node-revora-ai-builder",
-        cluster: "SINGAPORE-AI-NODE",
-        dialogue_turn_latency_ms: 18.2,
-        intent_match_accuracy: "99.4%",
-        channels_supported: ["WhatsApp_Business", "Web_Widget", "Messenger"],
-        active_conversations_monthly: 10200000,
-        health_status: "HEALTHY_OPTIMAL"
-      }
+      badge: '[ AI INFRASTRUCTURE · Alice Labs Singapore ]',
+      badgeClass: 'badge-ruby',
+      scope: 'TRANSFORMER NLP · MULTI-CHANNEL BOT BUILDER',
+      title: 'Alice Labs Revora AI Conversational Engine',
+      desc: 'Built conversational AI infrastructure powering 10M+ monthly dialogues across Singapore and Southeast Asia. Features visual multi-turn dialogue graph builders, custom Transformer NLP intent matching with sub-20ms inference, and high-throughput WhatsApp Cloud API integrations.',
+      highlights: [
+        { icon: '🤖', title: 'Visual Dialogue Graph Builder', desc: 'Empowered enterprise clients to design complex conditional conversation trees.' },
+        { icon: '⚡', title: '18ms Transformer Inference', desc: 'Optimized NLP intent classification with 99.4% intent matching accuracy.' },
+        { icon: '💬', title: 'WhatsApp Business Cloud API', desc: 'High-velocity webhook bridge handling millions of concurrent chat sessions.' },
+        { icon: '🔄', title: 'Automated Commerce & Agent Handoff', desc: 'In-chat payment checkouts and seamless escalation to human support agents.' }
+      ],
+      tech: ['Python', 'PyTorch / Transformers NLP', 'FastAPI', 'Redis Cache', 'WhatsApp Business API', 'WebSockets'],
+      metrics: {
+        lbl1: 'MONTHLY DIALOGUES', val1: '10M+ Sessions',
+        lbl2: 'INTENT ACCURACY', val2: '99.4% Match',
+        lbl3: 'INFERENCE SPEED', val3: '18ms P99',
+        lbl4: 'CHANNELS', val4: 'WhatsApp + Web'
+      },
+      activeNodes: ['node-ai', 'node-client', 'node-gateway']
+    },
+    all: {
+      badge: '[ ECOSYSTEM OVERVIEW · National Topology ]',
+      badgeClass: 'badge-red',
+      scope: 'END-TO-END FINTECH, ESG & AI INTEGRATION',
+      title: 'Unified Distributed FinTech & Green Topology',
+      desc: 'Comprehensive view of the national-scale ecosystem architected across bKash and Alice Labs Singapore. Connects 50M+ citizen endpoints, edge security gateways, 5,000 TPS disbursement sagas, Kafka partitioned streams, bKash Forest eco-gamification, and conversational AI.',
+      highlights: [
+        { icon: '🏛️', title: '50M+ Citizens & Enterprises', desc: 'Consumer app, USSD telco gateways, and corporate B2B payroll portals.' },
+        { icon: '⚡', title: 'FinTech + ESG Synergy', desc: 'Transaction micro-rewards automatically fund and verify tree planting.' },
+        { icon: '🔄', title: 'Kafka Partitioned Backbone', desc: '32 topic partitions decouple critical payment settlement from analytics.' },
+        { icon: '🤖', title: 'Conversational Automation', desc: 'AI assistant resolves inquiries and triggers authenticated payments.' }
+      ],
+      tech: ['Go', 'Java', 'Python', 'Apache Kafka', 'PostgreSQL', 'Redis', 'Kubernetes', 'Docker'],
+      metrics: {
+        lbl1: 'END-TO-END P99', val1: '<45ms Latency',
+        lbl2: 'BATCH SCALE', val2: '5,000 TPS',
+        lbl3: 'ACTIVE POPULATION', val3: '50M+ Users',
+        lbl4: 'PLATFORM UPTIME', val4: '99.999% SLA'
+      },
+      activeNodes: ['node-client', 'node-gateway', 'node-engine', 'node-kafka', 'node-forest', 'node-ai']
     }
   };
 
-  let currentNodeKey = 'client';
+  function setArchitectureBlueprint(key) {
+    const bp = architectureBlueprints[key] || architectureBlueprints.disbursement;
 
-  function inspectArchitectureNode(nodeKey) {
-    if (!nodeSpecs[nodeKey]) return;
-    currentNodeKey = nodeKey;
-    const spec = nodeSpecs[nodeKey];
-
-    // Highlight active card
-    qa('.arch-node').forEach((n) => {
-      if (n.getAttribute('data-node') === nodeKey) {
-        n.classList.add('active-inspected');
+    // Highlight tab
+    qa('.arch-tab').forEach((tab) => {
+      if (tab.getAttribute('data-flow') === key) {
+        tab.classList.add('active');
       } else {
-        n.classList.remove('active-inspected');
+        tab.classList.remove('active');
       }
     });
 
-    const inspectorTitle = q('#inspectorTitle');
-    const inspectorClusterTag = q('#inspectorClusterTag');
-    const inspectorRoleDesc = q('#inspectorRoleDesc');
-    const inspectorThroughput = q('#inspectorThroughput');
-    const inspectorLatency = q('#inspectorLatency');
-    const inspectorReplicas = q('#inspectorReplicas');
-    const inspectorUptime = q('#inspectorUptime');
-    const inspectorTechPills = q('#inspectorTechPills');
-    const inspectorPayloadScreen = q('#inspectorPayloadScreen');
+    const showcase = q('#archBlueprintShowcase');
+    if (showcase) {
+      gsap.to(showcase, {
+        opacity: 0.35,
+        y: 3,
+        duration: 0.15,
+        onComplete: () => {
+          const badgeEl = q('#blueprintBadge');
+          const scopeEl = q('#blueprintScope');
+          const titleEl = q('#blueprintTitle');
+          const descEl = q('#blueprintDesc');
+          const highlightsEl = q('#blueprintHighlights');
+          const techEl = q('#blueprintTechPills');
+          const bmLbl1 = q('#bmLbl1');
+          const bmVal1 = q('#bmVal1');
+          const bmLbl2 = q('#bmLbl2');
+          const bmVal2 = q('#bmVal2');
+          const bmLbl3 = q('#bmLbl3');
+          const bmVal3 = q('#bmVal3');
+          const bmLbl4 = q('#bmLbl4');
+          const bmVal4 = q('#bmVal4');
 
-    if (inspectorTitle) inspectorTitle.textContent = spec.title;
-    if (inspectorClusterTag) inspectorClusterTag.textContent = spec.cluster;
-    if (inspectorRoleDesc) inspectorRoleDesc.textContent = spec.desc;
-    if (inspectorThroughput) inspectorThroughput.textContent = spec.throughput;
-    if (inspectorLatency) inspectorLatency.textContent = spec.latency;
-    if (inspectorReplicas) inspectorReplicas.textContent = spec.replicas;
-    if (inspectorUptime) inspectorUptime.textContent = spec.uptime;
+          if (badgeEl) {
+            badgeEl.textContent = bp.badge;
+            badgeEl.className = `badge ${bp.badgeClass}`;
+          }
+          if (scopeEl) scopeEl.textContent = bp.scope;
+          if (titleEl) titleEl.textContent = bp.title;
+          if (descEl) descEl.textContent = bp.desc;
 
-    if (inspectorTechPills) {
-      inspectorTechPills.innerHTML = spec.tech.map((t) => `<span class="tech-pill">${t}</span>`).join('');
+          if (highlightsEl) {
+            highlightsEl.innerHTML = bp.highlights.map((h) => `
+              <div class="highlight-item">
+                <span class="hl-icon">${h.icon}</span>
+                <div>
+                  <strong>${h.title}</strong>
+                  <p>${h.desc}</p>
+                </div>
+              </div>
+            `).join('');
+          }
+
+          if (techEl) {
+            techEl.innerHTML = bp.tech.map((t) => `<span class="tech-pill">${t}</span>`).join('');
+          }
+
+          if (bmLbl1) bmLbl1.textContent = bp.metrics.lbl1;
+          if (bmVal1) bmVal1.textContent = bp.metrics.val1;
+          if (bmLbl2) bmLbl2.textContent = bp.metrics.lbl2;
+          if (bmVal2) bmVal2.textContent = bp.metrics.val2;
+          if (bmLbl3) bmLbl3.textContent = bp.metrics.lbl3;
+          if (bmVal3) bmVal3.textContent = bp.metrics.val3;
+          if (bmLbl4) bmLbl4.textContent = bp.metrics.lbl4;
+          if (bmVal4) bmVal4.textContent = bp.metrics.val4;
+
+          gsap.to(showcase, { opacity: 1, y: 0, duration: 0.25 });
+        }
+      });
     }
 
-    if (inspectorPayloadScreen) {
-      inspectorPayloadScreen.innerHTML = `<code>${JSON.stringify(spec.payload, null, 2)}</code>`;
-      gsap.fromTo(inspectorPayloadScreen, { opacity: 0.4, y: 3 }, { opacity: 1, y: 0, duration: 0.25 });
-    }
+    // Highlight active nodes in the microservice grid (never dim any node below full visibility)
+    qa('.arch-node').forEach((node) => {
+      const id = node.id;
+      node.style.opacity = '1';
+      if (bp.activeNodes.includes(id)) {
+        node.classList.add('active-inspected');
+      } else {
+        node.classList.remove('active-inspected');
+      }
+    });
   }
 
   // Flow Tabs Filter
   qa('.arch-tab').forEach((tab) => {
     tab.addEventListener('click', () => {
-      qa('.arch-tab').forEach((t) => t.classList.remove('active'));
-      tab.classList.add('active');
-
       const flow = tab.getAttribute('data-flow');
-      const nodes = qa('.arch-node');
-      const paths = qa('.circuit-path');
-
-      // Update Node Focus & Ripples
-      nodes.forEach((n) => {
-        n.classList.remove('node-pulse-active');
-        if (flow === 'all') {
-          n.style.opacity = '1';
-          n.style.filter = 'none';
-          n.classList.add('node-pulse-active');
-        } else if (flow === 'disbursement' || flow === 'fintech') {
-          if (n.id === 'node-client' || n.id === 'node-gateway' || n.id === 'node-engine' || n.id === 'node-kafka') {
-            n.style.opacity = '1';
-            n.style.filter = 'none';
-            n.classList.add('node-pulse-active');
-          } else {
-            n.style.opacity = '0.2';
-            n.style.filter = 'grayscale(100%)';
-          }
-        } else if (flow === 'forest') {
-          if (n.id === 'node-client' || n.id === 'node-engine' || n.id === 'node-kafka' || n.id === 'node-forest') {
-            n.style.opacity = '1';
-            n.style.filter = 'none';
-            n.classList.add('node-pulse-active');
-          } else {
-            n.style.opacity = '0.2';
-            n.style.filter = 'grayscale(100%)';
-          }
-        } else if (flow === 'ai') {
-          if (n.id === 'node-client' || n.id === 'node-gateway' || n.id === 'node-ai') {
-            n.style.opacity = '1';
-            n.style.filter = 'none';
-            n.classList.add('node-pulse-active');
-          } else {
-            n.style.opacity = '0.2';
-            n.style.filter = 'grayscale(100%)';
-          }
-        }
-      });
-
-      // Update SVG Path Glows
-      paths.forEach((p) => {
-        p.classList.remove('active');
-        if (flow === 'all') {
-          p.classList.add('active');
-        } else if (flow === 'disbursement' && p.classList.contains('path-disburse')) {
-          p.classList.add('active');
-        } else if (flow === 'forest' && (p.classList.contains('path-forest') || p.id === 'path-c3')) {
-          p.classList.add('active');
-        } else if (flow === 'ai' && p.classList.contains('path-ai')) {
-          p.classList.add('active');
-        }
-      });
-
-      // Auto-inspect primary flow node
-      if (flow === 'disbursement') inspectArchitectureNode('engine');
-      else if (flow === 'forest') inspectArchitectureNode('forest');
-      else if (flow === 'ai') inspectArchitectureNode('ai');
-      else inspectArchitectureNode('client');
+      setArchitectureBlueprint(flow);
     });
   });
 
-  // Click any node to inspect and trigger pulse wave
+  // Map individual microservice nodes to system blueprint
+  const nodeToBlueprintMap = {
+    client: 'gateway',
+    gateway: 'gateway',
+    engine: 'disbursement',
+    kafka: 'disbursement',
+    forest: 'forest',
+    ai: 'ai'
+  };
+
   qa('.arch-node').forEach((node) => {
     node.addEventListener('click', () => {
-      gsap.fromTo(node, { scale: 0.96 }, { scale: 1.04, duration: 0.35, yoyo: true, repeat: 1, ease: 'back.out(2)' });
-      node.classList.add('node-pulse-active');
-      setTimeout(() => node.classList.remove('node-pulse-active'), 1600);
-
-      const nodeId = node.getAttribute('data-node');
-      if (nodeId) {
-        inspectArchitectureNode(nodeId);
-      }
+      const nodeKey = node.getAttribute('data-node');
+      const targetBp = nodeToBlueprintMap[nodeKey] || 'all';
+      setArchitectureBlueprint(targetBp);
     });
   });
 
-  // Pulse Current Node Button
-  const btnPulseCurrentNode = q('#btnPulseCurrentNode');
-  if (btnPulseCurrentNode) {
-    btnPulseCurrentNode.addEventListener('click', () => {
-      const activeNodeEl = q(`#node-${currentNodeKey}`);
-      if (activeNodeEl) {
-        gsap.fromTo(activeNodeEl, { scale: 0.92 }, { scale: 1.06, duration: 0.4, yoyo: true, repeat: 1, ease: 'back.out(2.5)' });
-        activeNodeEl.classList.add('node-pulse-active');
-        setTimeout(() => activeNodeEl.classList.remove('node-pulse-active'), 1800);
-      }
-
-      // Pop corresponding live telemetry packet
-      const spec = nodeSpecs[currentNodeKey];
-      if (spec) {
-        popTelemetryCard({
-          title: spec.title.replace(/\[ NODE INSPECTOR: | \]/g, ''),
-          badge: spec.cluster,
-          badgeClass: currentNodeKey === 'forest' ? 'forest' : currentNodeKey === 'ai' ? 'ai' : 'disburse',
-          desc: spec.desc,
-          metricLbl: 'THROUGHPUT / LATENCY',
-          metricVal: `${spec.throughput} · ${spec.latency}`,
-          hash: `spec_${Math.random().toString(36).substring(2, 9).toUpperCase()}`
-        });
-      }
-    });
-  }
+  // Explicitly initialize active blueprint on initial page load
+  setArchitectureBlueprint('disbursement');
 
   // ==========================================================================
-  // 07. "POP CARD FROM ANYWHERE TO ANYWHERE" & PRODUCTION EVENT SIMULATOR
+  // 07. PRODUCTION TELEMETRY & EVENT STREAM CONSOLE
   // ==========================================================================
-  const popStage = q('#popCardStage');
   const simTerminalScreen = q('#simTerminalScreen');
   const simPacketCount = q('#simPacketCount');
   const liveTpsCounter = q('#liveTpsCounter');
   const liveLatencyGauge = q('#liveLatencyGauge');
-  const liveActiveCardsCount = q('#liveActiveCardsCount');
   const toggleSoundBtn = q('#toggleSoundBtn');
   const toggleStreamBtn = q('#toggleStreamBtn');
   const clearTerminalBtn = q('#clearTerminalBtn');
 
-  let activeCardCount = 0;
   let packetCounter = 3;
   let soundEnabled = true;
   let autoStreamActive = true;
@@ -1139,13 +1058,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function updateActiveCardsDisplay() {
-    if (liveActiveCardsCount) {
-      liveActiveCardsCount.textContent = `${activeCardCount} ACTIVE`;
-      liveActiveCardsCount.style.color = activeCardCount > 0 ? '#ff1e42' : 'var(--muted)';
-    }
-  }
-
   function spikeMetrics(tpsBase = 5000, latencyBase = 28) {
     if (liveTpsCounter) {
       const spikeTps = Math.floor(tpsBase + (Math.random() - 0.3) * 600);
@@ -1184,241 +1096,81 @@ window.addEventListener('DOMContentLoaded', () => {
     simTerminalScreen.scrollTop = simTerminalScreen.scrollHeight;
   }
 
-  // Background Telemetry Streamer (Keeps console dynamic & alive)
+  // Background Telemetry Streamer (Streams peaceful live log entries in the console only)
   const simulatedEvents = [
-    { cat: 'stream', tag: 'FINTECH_TXN', msg: 'bKash Merchant Settlement #MS-77182 processed (৳62,400) · Kafka Partition #09' },
-    { cat: 'stream', tag: 'GIS_SYNC', msg: 'bKash Forest user tree seed planted at Lat 23.8103, Lon 90.4125 (CO₂ -0.02kg)' },
-    { cat: 'stream', tag: 'REVORA_NLP', msg: 'WhatsApp query session #WA-9042 intent parsed in 16ms (Confidence: 99.8%)' },
-    { cat: 'stream', tag: 'G2P_EFT', msg: 'Government stipend batch #BD-2026-88 disbursed to 1,840 recipient digital wallets' },
-    { cat: 'stream', tag: 'CLUSTER_HEARTBEAT', msg: 'Dhaka Core Cluster Node #02 OK · Latency: 0.72ms · Zero Dropped Packets' },
-    { cat: 'stream', tag: 'SELF_SERVICE', msg: 'Merchant Instant Onboarding eKYC OCR verified in 1.4s · Token issued' }
+    {
+      cat: 'disburse',
+      tag: 'IDS_BATCH',
+      msg: '⚡ 5,000 TPS instant distribution batch dispatched across 50,000 digital wallets (34ms P99 · 100% Idempotent)'
+    },
+    {
+      cat: 'forest',
+      tag: 'GIS_SYNC',
+      msg: '🌲 +500 Verified Trees credited to eco-ledger. Geo-zone #DHAKA-48 (+12.4 Tons CO₂ offset computed)'
+    },
+    {
+      cat: 'ai',
+      tag: 'REVORA_NLP',
+      msg: '🤖 Natural Language intent parsed in 18ms. Multi-turn WhatsApp dialogue tree routed (99.4% match)'
+    },
+    {
+      cat: 'stream',
+      tag: 'G2P_EFT',
+      msg: '💰 Government stipend batch #BD-2026-88 disbursed to 1,840 recipient digital wallets with zero record loss'
+    },
+    {
+      cat: 'cascade',
+      tag: 'GATEWAY_SHIELD',
+      msg: '🛡️ API Gateway token-bucket rate limiter throttled 18,200 req/s surge with 0.4ms overhead'
+    },
+    {
+      cat: 'forest',
+      tag: 'ECO_MILESTONE',
+      msg: '🌿 1.2M+ Tree milestone reached across nationwide GIS plantation coordinates'
+    },
+    {
+      cat: 'stream',
+      tag: 'CLUSTER_HEALTH',
+      msg: 'Dhaka Core Cluster Node #02 OK · Latency: 0.72ms · Zero Dropped Packets · 32 Kafka Partitions Synced'
+    }
   ];
   let streamIdx = 0;
 
+  // Stream logs every 3.2s
   setInterval(() => {
     if (!autoStreamActive) return;
     const evt = simulatedEvents[streamIdx % simulatedEvents.length];
     streamIdx++;
     logToTerminal(evt.cat, evt.tag, evt.msg);
-    spikeMetrics(4820, 28);
-  }, 3400);
-
-  // Pop Telemetry Card Engine
-  function popTelemetryCard(options = {}) {
-    if (!popStage) return;
-
-    activeCardCount++;
-    updateActiveCardsDisplay();
-
-    const card = document.createElement('div');
-    card.className = 'telemetry-pop-card glass-card';
-
-    const title = options.title || 'Live Telemetry Packet';
-    const badge = options.badge || 'EVENT DISPATCH';
-    const badgeClass = options.badgeClass || 'disburse';
-    const desc = options.desc || 'Real-time telemetry event processed across distributed cloud nodes.';
-    const metricLbl = options.metricLbl || 'PROCESSING TIME';
-    const metricVal = options.metricVal || `${(Math.random() * 30 + 12).toFixed(1)}ms`;
-    const hash = options.hash || `pkt_${Math.random().toString(36).substring(2, 10)}`;
-
-    card.innerHTML = `
-      <div class="pop-card-header">
-        <span class="pop-card-badge ${badgeClass}">${badge}</span>
-        <button class="pop-card-close" aria-label="Dismiss card" title="Dismiss card">&times;</button>
-      </div>
-      <h4 class="pop-card-title">${title}</h4>
-      <p class="pop-card-desc">${desc}</p>
-      <div class="pop-card-metric-row">
-        <span>${metricLbl}</span>
-        <span>${metricVal}</span>
-      </div>
-      <div class="pop-card-hash">ID: ${hash} · ${new Date().toLocaleTimeString()} (Click to dismiss)</div>
-    `;
-
-    popStage.appendChild(card);
-
-    // Dynamic flight trajectory vectors (pop from anywhere to anywhere)
-    const origins = [
-      { x: -380, y: Math.random() * (window.innerHeight * 0.7), rot: -28 },
-      { x: window.innerWidth + 380, y: Math.random() * (window.innerHeight * 0.7), rot: 28 },
-      { x: Math.random() * (window.innerWidth * 0.7), y: -250, rot: -15 },
-      { x: Math.random() * (window.innerWidth * 0.7), y: window.innerHeight + 250, rot: 18 }
-    ];
-
-    const origin = origins[Math.floor(Math.random() * origins.length)];
-
-    // Target landing coordinates (safe viewport area)
-    const targetW = 340;
-    const targetH = 220;
-    const targetX = Math.max(24, Math.min(window.innerWidth - targetW - 24, Math.random() * (window.innerWidth - targetW - 48) + 24));
-    const targetY = Math.max(90, Math.min(window.innerHeight - targetH - 30, Math.random() * (window.innerHeight - targetH - 120) + 90));
-    const targetRot = (Math.random() - 0.5) * 8;
-
-    // Flight Tween with Kinetic Spring Bounce
-    gsap.fromTo(card, {
-      x: origin.x,
-      y: origin.y,
-      rotation: origin.rot,
-      scale: 0.25,
-      opacity: 0
-    }, {
-      x: targetX,
-      y: targetY,
-      rotation: targetRot,
-      scale: 1,
-      opacity: 1,
-      duration: 0.85,
-      ease: 'back.out(2.2)',
-      onComplete: () => {
-        // Gentle floating oscillation while docked
-        gsap.to(card, {
-          y: targetY + (Math.random() > 0.5 ? 8 : -8),
-          rotation: targetRot + (Math.random() > 0.5 ? 1.5 : -1.5),
-          duration: 2 + Math.random() * 1.5,
-          yoyo: true,
-          repeat: -1,
-          ease: 'sine.inOut'
-        });
-      }
-    });
-
-    let dismissed = false;
-    const dismissCard = () => {
-      if (dismissed) return;
-      dismissed = true;
-      activeCardCount = Math.max(0, activeCardCount - 1);
-      updateActiveCardsDisplay();
-
-      const exitOrigins = [
-        { x: -400, y: targetY + (Math.random() - 0.5) * 200, rot: -35 },
-        { x: window.innerWidth + 400, y: targetY + (Math.random() - 0.5) * 200, rot: 35 },
-        { x: targetX, y: -300, rot: 15 }
-      ];
-      const exit = exitOrigins[Math.floor(Math.random() * exitOrigins.length)];
-
-      gsap.to(card, {
-        x: exit.x,
-        y: exit.y,
-        rotation: exit.rot,
-        scale: 0.4,
-        opacity: 0,
-        duration: 0.55,
-        ease: 'power3.in',
-        onComplete: () => {
-          if (card.parentNode) card.parentNode.removeChild(card);
-        }
-      });
-    };
-
-    // Close button dismiss
-    const closeBtn = card.querySelector('.pop-card-close');
-    if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); dismissCard(); });
-
-    // Click anywhere on card to dismiss
-    card.addEventListener('click', dismissCard);
-
-    // Auto-dismiss after 6.8 seconds
-    setTimeout(() => {
-      if (card.parentNode) dismissCard();
-    }, 6800);
-  }
+    spikeMetrics(5120, 24);
+  }, 3200);
 
   // Unified Simulation Trigger Router
   function triggerSimulation(actionType) {
     playSynthBlip(actionType);
     spikeMetrics(actionType === 'disburse' ? 5200 : actionType === 'cascade' ? 5400 : 4900, 24);
 
-    const triggerEl = q(`#btnPop${actionType.charAt(0).toUpperCase() + actionType.slice(1)}`);
-    if (triggerEl) {
-      triggerEl.classList.add('is-firing');
-      setTimeout(() => triggerEl.classList.remove('is-firing'), 400);
-    }
-
     if (actionType === 'disburse') {
-      logToTerminal('disburse', 'IDS_BATCH_EMITTED', '⚡ 5,000 TPS instant distribution batch dispatched across 50,000 digital wallets (34ms P99)');
-      popTelemetryCard({
-        title: '⚡ IDS 5,000 TPS Batch Settlement',
-        badge: 'bKash IDS / G2P EFT',
-        badgeClass: 'disburse',
-        desc: 'Instant fund distribution batch executed across 50,000 recipient wallets with zero-loss consistency.',
-        metricLbl: 'LATENCY / TPS',
-        metricVal: '34ms · 5,000 TPS',
-        hash: `ids_${Math.random().toString(36).substring(2, 9).toUpperCase()}`
-      });
+      logToTerminal('disburse', 'IDS_BATCH_EMITTED', '⚡ 5,000 TPS instant distribution batch dispatched across 50,000 digital wallets (34ms P99 · 100% Idempotent)');
     } else if (actionType === 'forest') {
       logToTerminal('forest', 'FOREST_TREES_CREDITED', '🌲 +500 Verified Trees credited to eco-ledger. Geo-zone #DHAKA-48 (+12.4 Tons CO₂ offset computed)');
-      popTelemetryCard({
-        title: '🌲 bKash Forest +500 Verified Trees',
-        badge: 'bKash Forest (Team Lead)',
-        badgeClass: 'forest',
-        desc: 'Eco-gamification reward loop credited. Verified GIS geo-coordinates mapped to plantation zone #DHAKA-48.',
-        metricLbl: 'CO₂ OFFSET ADDED',
-        metricVal: '+12.4 Tons CO₂',
-        hash: `forest_${Math.random().toString(36).substring(2, 9).toUpperCase()}`
-      });
     } else if (actionType === 'ai') {
       logToTerminal('ai', 'REVORA_NLP_INFERRED', '🤖 Natural Language intent parsed in 18ms. Multi-turn WhatsApp dialogue tree routed (99.4% match)');
-      popTelemetryCard({
-        title: '🤖 Revora AI WhatsApp Multi-Turn Dialogue',
-        badge: 'Alice Labs (Revora AI)',
-        badgeClass: 'ai',
-        desc: 'Natural Language intent classified. Automated product support dialogue routed in <25ms.',
-        metricLbl: 'CONFIDENCE SCORE',
-        metricVal: '99.4% NLP Match',
-        hash: `revora_${Math.random().toString(36).substring(2, 9).toUpperCase()}`
-      });
     } else if (actionType === 'cascade') {
       logToTerminal('cascade', 'TRI_VECTOR_CASCADE', '💥 BROADCASTING FULL ECOSYSTEM WAVE: IDS settlement + Forest GIS + Revora NLP simultaneously');
       setTimeout(() => {
-        popTelemetryCard({
-          title: '💰 Payroll & G2P EFT Grant Distributed',
-          badge: 'NATIONAL FINTECH',
-          badgeClass: 'disburse',
-          desc: 'Emergency G2P government aid package disbursed with automated bank ledger sync.',
-          metricLbl: 'SETTLED SUM',
-          metricVal: '100% Idempotent',
-          hash: `g2p_${Math.random().toString(36).substring(2, 8)}`
-        });
-      }, 0);
-
+        logToTerminal('disburse', 'G2P_GRANT', '💰 Payroll & G2P EFT Emergency Social Grant disbursed with bank ledger sync');
+      }, 150);
       setTimeout(() => {
-        popTelemetryCard({
-          title: '🌿 1.2M+ Tree Milestone Reached',
-          badge: 'ECO SUSTAINABILITY',
-          badgeClass: 'forest',
-          desc: 'bKash Forest user ecosystem crossed 1.2 Million real-world trees planted.',
-          metricLbl: 'VERIFIED REGION',
-          metricVal: 'Bangladesh GIS',
-          hash: `eco_${Math.random().toString(36).substring(2, 8)}`
-        });
-      }, 200);
-
+        logToTerminal('forest', 'ECO_REWARD', '🌿 1.2M+ Tree milestone reward loops credited across Bangladesh GIS nodes');
+      }, 300);
       setTimeout(() => {
-        popTelemetryCard({
-          title: '🤖 10M+ Conversational AI Workflows',
-          badge: 'REVORA CHATBOT',
-          badgeClass: 'ai',
-          desc: 'Alice Labs visual dialogue trees actively routing high-volume WhatsApp merchant queries.',
-          metricLbl: 'ACTIVE CHANNELS',
-          metricVal: 'WhatsApp + Web',
-          hash: `ai_${Math.random().toString(36).substring(2, 8)}`
-        });
-      }, 400);
+        logToTerminal('ai', 'REVORA_ROUTED', '🤖 10M+ Conversational AI workflows active across WhatsApp & Web channels');
+      }, 450);
     }
   }
 
-  // Interactive Live Simulation Buttons & Cards
-  const btnPopDisburse = q('#btnPopDisburse');
-  const btnPopForest = q('#btnPopForest');
-  const btnPopAI = q('#btnPopAI');
-  const btnPopCascade = q('#btnPopCascade');
-
-  if (btnPopDisburse) btnPopDisburse.addEventListener('click', () => triggerSimulation('disburse'));
-  if (btnPopForest) btnPopForest.addEventListener('click', () => triggerSimulation('forest'));
-  if (btnPopAI) btnPopAI.addEventListener('click', () => triggerSimulation('ai'));
-  if (btnPopCascade) btnPopCascade.addEventListener('click', () => triggerSimulation('cascade'));
-
-  // Quick Action Buttons in Banner
+  // Quick Action Buttons in Banner / Toolbar
   qa('[data-sim-trigger]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const type = btn.getAttribute('data-sim-trigger');
@@ -1439,7 +1191,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (toggleStreamBtn) {
     toggleStreamBtn.addEventListener('click', () => {
       autoStreamActive = !autoStreamActive;
-      toggleStreamBtn.textContent = autoStreamActive ? '⚡ AUTO: ON' : '⏸️ AUTO: PAUSED';
+      toggleStreamBtn.textContent = autoStreamActive ? '⚡ STREAM: ON' : '⏸️ STREAM: PAUSED';
       toggleStreamBtn.classList.toggle('off', !autoStreamActive);
     });
   }
@@ -1476,7 +1228,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // 08. SELECTIVE 3D MAGNETIC CARD TILT & SPECULAR SHEEN (KEY SHOWCASE CARDS)
   // ==========================================================================
-  const selectiveTiltCards = qa('.project-showcase, .arch-node, #heroScopeCard, .telemetry-pop-card, .tilt-highlight, .impact-stat-box, .sim-trigger-card');
+  const selectiveTiltCards = qa('.skill-card, .tilt-card, .project-showcase, .arch-node, #heroScopeCard, .tilt-highlight, .impact-stat-box');
 
   selectiveTiltCards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
