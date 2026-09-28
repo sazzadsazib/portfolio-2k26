@@ -402,10 +402,10 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 04. SCROLLTRIGGER & VIDEO PINNING SETUP
+  // 04. ADVANCED GSAP SCROLLTRIGGER REVEAL & SCALE SUITE
   // ==========================================================================
   function initScrollAnimations() {
-    // Pinned Hero Section with Buttery Smooth Scroll Scrub
+    // 1. Pinned Hero Section with Velvety Scroll Scrub
     ScrollTrigger.create({
       trigger: '.hero',
       start: 'top top',
@@ -418,7 +418,32 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Timeline Line Fill Animation (Career Arc)
+    // 2. Global Section Headers Reveal (Staggered Badge, 3D Title, and Description)
+    qa('.section-header').forEach((hdr) => {
+      const badge = hdr.querySelector('.section-badge');
+      const title = hdr.querySelector('.section-title');
+      const desc = hdr.querySelector('.section-desc');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: hdr,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      });
+
+      if (badge) {
+        tl.from(badge, { x: -35, opacity: 0, scale: 0.8, duration: 0.65, ease: 'back.out(2.2)' });
+      }
+      if (title) {
+        tl.from(title, { y: 40, opacity: 0, rotateX: 15, transformPerspective: 800, duration: 0.8, ease: 'power3.out' }, '-=0.4');
+      }
+      if (desc) {
+        tl.from(desc, { y: 25, opacity: 0, duration: 0.7, ease: 'power2.out' }, '-=0.4');
+      }
+    });
+
+    // 3. Career Timeline Fill & Staggered Cards Reveal with Scale
     const timelineFill = q('#timelineFill');
     if (timelineFill) {
       ScrollTrigger.create({
@@ -432,96 +457,253 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Timeline Cards 3D Pop-in Reveal (Alternating Left & Right Trajectories)
     qa('.timeline-card').forEach((card, idx) => {
       const isEven = idx % 2 === 0;
-      gsap.from(card, {
-        x: isEven ? -60 : 60,
-        y: 40,
-        rotateY: isEven ? 12 : -12,
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.85,
-        delay: idx * 0.06,
-        ease: 'back.out(1.5)',
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: card,
-          start: 'top 85%'
+          start: 'top 85%',
+          toggleActions: 'play none none none'
         }
       });
-    });
 
-    // Projects Grid 3D Diagonal Pop Reveal
-    qa('.project-showcase').forEach((item, idx) => {
-      const isEven = idx % 2 === 0;
-      gsap.from(item, {
-        x: isEven ? -40 : 40,
-        y: 50,
-        rotate: isEven ? -2 : 2,
-        scale: 0.92,
+      tl.from(card, {
+        x: isEven ? -60 : 60,
+        y: 45,
+        rotateY: isEven ? 10 : -10,
+        scale: 0.88,
         opacity: 0,
-        duration: 0.75,
-        delay: idx * 0.1,
-        ease: 'back.out(1.4)',
-        scrollTrigger: {
-          trigger: item,
-          start: 'top 85%'
-        }
+        duration: 0.9,
+        ease: 'back.out(1.5)'
       });
-    });
 
-    // Architecture Simulator Nodes Pop
-    qa('.arch-node').forEach((node, i) => {
-      gsap.from(node, {
-        scale: 0.85,
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        delay: i * 0.08,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-          trigger: '.architecture-diagram',
-          start: 'top 75%'
-        }
-      });
-    });
-
-    // Digital Number Counter-Up Animation
-    ScrollTrigger.create({
-      trigger: '.impact-grid',
-      start: 'top 80%',
-      once: true,
-      onEnter: () => {
-        qa('.counter-num').forEach((counter) => {
-          const target = parseFloat(counter.getAttribute('data-target') || '0');
-          const decimals = parseInt(counter.getAttribute('data-decimals') || '0');
-          const obj = { val: 0 };
-          gsap.to(obj, {
-            val: target,
-            duration: 2.2,
-            ease: 'power2.out',
-            onUpdate: () => {
-              counter.textContent = decimals > 0 ? obj.val.toFixed(decimals) : Math.round(obj.val).toLocaleString();
-            }
-          });
-        });
+      const hls = card.querySelectorAll('.highlight-box');
+      if (hls.length) {
+        tl.from(hls, {
+          y: 20,
+          opacity: 0,
+          scale: 0.94,
+          stagger: 0.08,
+          duration: 0.55,
+          ease: 'power2.out'
+        }, '-=0.45');
       }
     });
 
-    // Impact Stats Box Pop Animation
-    qa('.impact-stat-box').forEach((box, i) => {
-      gsap.from(box, {
-        y: 35,
-        scale: 0.92,
-        opacity: 0,
-        duration: 0.7,
-        delay: i * 0.1,
-        ease: 'back.out(1.6)',
+    // 4. Featured Products (Projects) Dynamic Scale & Perspective Reveal
+    qa('.project-showcase').forEach((item, idx) => {
+      const isEven = idx % 2 === 0;
+      const img = item.querySelector('.project-img');
+      const stats = item.querySelectorAll('.p-stat');
+
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: '.impact-section',
-          start: 'top 80%'
+          trigger: item,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
         }
       });
+
+      tl.from(item, {
+        y: 60,
+        scale: 0.85,
+        opacity: 0,
+        rotateX: 8,
+        transformPerspective: 1000,
+        duration: 0.95,
+        delay: idx * 0.08,
+        ease: 'power3.out'
+      });
+
+      if (img) {
+        tl.from(img, {
+          scale: 1.18,
+          duration: 1.2,
+          ease: 'power2.out'
+        }, '-=0.8');
+      }
+
+      if (stats.length) {
+        tl.from(stats, {
+          scale: 0.75,
+          opacity: 0,
+          y: 15,
+          stagger: 0.07,
+          duration: 0.5,
+          ease: 'back.out(1.8)'
+        }, '-=0.5');
+      }
+    });
+
+    // 5. Architecture Simulator Diagram & Topology Nodes Staggered Pop
+    const archDiag = q('.architecture-diagram');
+    if (archDiag) {
+      const archTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: archDiag,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      });
+
+      archTl.from(archDiag, {
+        scale: 0.92,
+        y: 45,
+        opacity: 0,
+        duration: 0.85,
+        ease: 'power3.out'
+      })
+      .from('.circuit-path', {
+        strokeDashoffset: 120,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.9,
+        ease: 'power2.out'
+      }, '-=0.5')
+      .from('.arch-node', {
+        scale: 0.72,
+        y: 30,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 0.7,
+        ease: 'back.out(2)'
+      }, '-=0.6');
+    }
+
+    // 6. Skills Grid Wave Pop-in with Dynamic Scale
+    const skillsGrid = q('.skills-grid');
+    if (skillsGrid) {
+      gsap.from('.skill-card', {
+        scale: 0.65,
+        y: 35,
+        opacity: 0,
+        duration: 0.65,
+        stagger: {
+          amount: 0.45,
+          from: 'center',
+          grid: 'auto'
+        },
+        ease: 'back.out(2)',
+        scrollTrigger: {
+          trigger: skillsGrid,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      });
+    }
+
+    // 7. Impact Dashboard Stats Scale & Counter Animation
+    const impactGrid = q('.impact-grid');
+    if (impactGrid) {
+      const impactTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: impactGrid,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      });
+
+      impactTl.from(impactGrid, {
+        scale: 0.9,
+        y: 40,
+        opacity: 0,
+        duration: 0.85,
+        ease: 'power3.out'
+      })
+      .from('.impact-stat-box', {
+        scale: 0.75,
+        y: 25,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.75,
+        ease: 'back.out(1.8)'
+      }, '-=0.5');
+
+      qa('.counter-num').forEach((counter) => {
+        const target = parseFloat(counter.getAttribute('data-target') || '0');
+        const decimals = parseInt(counter.getAttribute('data-decimals') || '0');
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 2.4,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: impactGrid,
+            start: 'top 80%'
+          },
+          onUpdate: () => {
+            counter.textContent = decimals > 0 ? obj.val.toFixed(decimals) : Math.round(obj.val).toLocaleString();
+          }
+        });
+      });
+    }
+
+    // 8. Interactive Simulator Panel & Action Buttons
+    const simPanel = q('.interactive-simulator-panel');
+    if (simPanel) {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: simPanel,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      })
+      .from(simPanel, {
+        scale: 0.92,
+        y: 35,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      })
+      .from('.sim-btn', {
+        scale: 0.8,
+        y: 20,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 0.65,
+        ease: 'back.out(1.8)'
+      }, '-=0.4');
+    }
+
+    // 9. Contact Card & Action Boxes Reveal
+    const contactCard = q('.contact-card');
+    if (contactCard) {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: contactCard,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      })
+      .from(contactCard, {
+        scale: 0.9,
+        y: 45,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out'
+      })
+      .from('.contact-action-box', {
+        scale: 0.8,
+        y: 25,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.75,
+        ease: 'back.out(1.8)'
+      }, '-=0.5');
+    }
+
+    // 10. Kinetic Marquee Velocity-Tied Parallax
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: (self) => {
+        const velocity = Math.abs(self.getVelocity());
+        const speedMultiplier = Math.min(3.2, 1 + velocity / 1200);
+        qa('.marquee-track').forEach((track) => {
+          track.style.animationDuration = `${32 / speedMultiplier}s`;
+        });
+      }
     });
   }
 
@@ -906,11 +1088,11 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 08. 3D MAGNETIC CARD TILT PHYSICS & SPECULAR CRIMSON GLARE
+  // 08. SELECTIVE 3D MAGNETIC CARD TILT & SPECULAR SHEEN (KEY SHOWCASE CARDS)
   // ==========================================================================
-  const interactiveCards = qa('.glass-card, .timeline-card-inner, .project-showcase, .skill-card, .impact-stat-box, .contact-action-box');
+  const selectiveTiltCards = qa('.project-showcase, .arch-node, #heroScopeCard, .telemetry-pop-card, .tilt-highlight, .impact-stat-box');
 
-  interactiveCards.forEach((card) => {
+  selectiveTiltCards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -918,15 +1100,21 @@ window.addEventListener('DOMContentLoaded', () => {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      // Calculate subtle 3D tilt angles
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
+      // Real-time Specular Sheen Lighting coordinates
+      const sheenX = `${Math.round((x / rect.width) * 100)}%`;
+      const sheenY = `${Math.round((y / rect.height) * 100)}%`;
+      card.style.setProperty('--sheen-x', sheenX);
+      card.style.setProperty('--sheen-y', sheenY);
+
+      // Controlled 3D perspective rotation angles
+      const rotateX = ((y - centerY) / centerY) * -9.5;
+      const rotateY = ((x - centerX) / centerX) * 9.5;
 
       gsap.to(card, {
         rotateX,
         rotateY,
         transformPerspective: 1000,
-        scale: 1.02,
+        scale: 1.03,
         duration: 0.35,
         ease: 'power2.out',
         overwrite: 'auto'
@@ -938,9 +1126,35 @@ window.addEventListener('DOMContentLoaded', () => {
         rotateX: 0,
         rotateY: 0,
         scale: 1,
-        duration: 0.55,
+        duration: 0.6,
         ease: 'power2.out',
         overwrite: 'auto'
+      });
+    });
+  });
+
+  // Magnetic Button Cursor Pull Micro-Interactions
+  qa('.btn-primary, .btn-glass, .sim-btn').forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      gsap.to(btn, {
+        x: x * 0.26,
+        y: y * 0.26,
+        scale: 1.04,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.55,
+        ease: 'elastic.out(1.2, 0.4)'
       });
     });
   });
