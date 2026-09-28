@@ -70,35 +70,18 @@ class SmoothVideoFrameScrubber {
       }
     });
 
-    // In-memory Blob preloader to eliminate network socket latency and Range stalls
-    const initialSrc = this.video.getAttribute('src') || '/portfolio-placeholder.mp4';
-    if (initialSrc && !initialSrc.startsWith('blob:')) {
-      fetch(initialSrc)
-        .then((res) => {
-          if (res.ok) return res.blob();
-          throw new Error('Blob fetch failed');
-        })
-        .then((blob) => {
-          const blobUrl = URL.createObjectURL(blob);
-          const prevTime = this.video.currentTime || 0.001;
-          this.video.src = blobUrl;
-          this.video.currentTime = Math.max(0.001, prevTime);
-        })
-        .catch(() => {
-          // Fallback to existing src
-        });
-    }
-
     const start = () => {
-      // Prime decoder pipeline smoothly
-      this.video.currentTime = 0.001;
-      const playPromise = this.video.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          this.video.pause();
-          this.video.currentTime = 0.001;
-        }).catch(() => {});
-      }
+      // Prime decoder pipeline smoothly to a visible initial frame
+      try {
+        this.video.currentTime = 0.05;
+        const playPromise = this.video.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            this.video.pause();
+            this.video.currentTime = 0.05;
+          }).catch(() => {});
+        }
+      } catch (e) {}
 
       if (!this.isLoopRunning) {
         this.isLoopRunning = true;
@@ -118,7 +101,7 @@ class SmoothVideoFrameScrubber {
   executeSeek(time) {
     if (!this.video || !this.video.duration || isNaN(this.video.duration)) return;
     const maxDur = Math.max(0.1, this.video.duration - 0.05);
-    const clampedTime = Math.max(0.001, Math.min(maxDur, time));
+    const clampedTime = Math.max(0.02, Math.min(maxDur, time));
 
     this.isSeeking = true;
 

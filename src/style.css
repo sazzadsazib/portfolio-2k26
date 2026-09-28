@@ -645,16 +645,16 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   pointer-events: none;
-  filter: contrast(1.08) brightness(0.96) saturate(1.2);
+  filter: contrast(1.06) brightness(1.02) saturate(1.2);
 }
 
 .hero-video-shade {
   position: absolute;
   inset: 0;
   background: 
-    linear-gradient(90deg, rgba(5, 4, 6, 0.8) 0%, rgba(5, 4, 6, 0.25) 50%, rgba(5, 4, 6, 0.75) 100%),
-    linear-gradient(0deg, rgba(5, 4, 6, 0.85) 0%, transparent 50%, rgba(5, 4, 6, 0.3) 100%),
-    radial-gradient(circle at top right, rgba(255, 30, 66, 0.15) 0%, transparent 60%);
+    linear-gradient(90deg, rgba(5, 4, 6, 0.5) 0%, rgba(5, 4, 6, 0.1) 50%, rgba(5, 4, 6, 0.5) 100%),
+    linear-gradient(0deg, rgba(5, 4, 6, 0.55) 0%, transparent 40%, rgba(5, 4, 6, 0.25) 100%),
+    radial-gradient(circle at top right, rgba(255, 30, 66, 0.12) 0%, transparent 60%);
   pointer-events: none;
   z-index: 1;
 }
@@ -679,11 +679,11 @@ body {
 .glass-card-panel {
   padding: 38px;
   border-radius: 20px;
-  background: rgba(14, 8, 12, 0.94);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  background: rgba(14, 8, 12, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--line-highlight);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 30, 66, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 30, 66, 0.12);
 }
 
 .hero-tag-wrap {
@@ -726,11 +726,11 @@ body {
    -------------------------------------------------------------------------- */
 .hero-scope-card {
   padding: 32px;
-  background: rgba(12, 6, 9, 0.96) !important;
-  backdrop-filter: blur(32px) !important;
-  -webkit-backdrop-filter: blur(32px) !important;
+  background: rgba(12, 6, 9, 0.78) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
   border: 1.5px solid rgba(255, 30, 66, 0.5) !important;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 30, 66, 0.22) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 30, 66, 0.22) !important;
   display: flex;
   flex-direction: column;
   gap: 18px;
