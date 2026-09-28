@@ -1027,39 +1027,209 @@ window.addEventListener('DOMContentLoaded', () => {
       const email = copyEmailBtn.getAttribute('data-email') || 'sazib66@gmail.com';
       navigator.clipboard.writeText(email).then(() => {
         const original = copyBtnText.textContent;
-        copyBtnText.textContent = 'Copied sazib66@gmail.com! ✓';
+        copyBtnText.textContent = '[ COPIED: sazib66@gmail.com ✓ ]';
         copyEmailBtn.style.background = '#ff1e42';
         copyEmailBtn.style.color = '#fff';
         setTimeout(() => {
           copyBtnText.textContent = original;
           copyEmailBtn.style.background = '';
           copyEmailBtn.style.color = '';
-        }, 2200);
+        }, 2400);
       });
     });
   }
 
   // ==========================================================================
-  // 12. INTERACTIVE CRIMSON CURSOR GLOW
+  // 12. NUDOT TEXT SCRAMBLER / DECODER MATRIX HOVER EFFECT
   // ==========================================================================
-  const cursorGlow = q('#cursorGlow');
-  if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
+  class TextScrambler {
+    constructor(el) {
+      this.el = el;
+      this.chars = '!<>-_\\/[]{}—=+*^?#0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      this.originalText = el.textContent.trim();
+      this.frame = 0;
+      this.queue = [];
+      this.frameRequest = null;
+      this.isScrambling = false;
+    }
 
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+    setText(newText) {
+      const oldText = this.el.textContent;
+      const length = Math.max(oldText.length, newText.length);
+      this.queue = [];
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || '';
+        const to = newText[i] || '';
+        const start = Math.floor(Math.random() * 8);
+        const end = start + Math.floor(Math.random() * 12) + 10;
+        this.queue.push({ from, to, start, end, char: '' });
+      }
+      cancelAnimationFrame(this.frameRequest);
+      this.frame = 0;
+      this.isScrambling = true;
+      this.update();
+    }
 
-    const updateCursor = () => {
-      currentX += (mouseX - currentX) * 0.12;
-      currentY += (mouseY - currentY) * 0.12;
-      cursorGlow.style.transform = `translate(${currentX}px, ${currentY}px)`;
-      requestAnimationFrame(updateCursor);
-    };
-    updateCursor();
+    update() {
+      let output = '';
+      let complete = 0;
+      for (let i = 0, n = this.queue.length; i < n; i++) {
+        let { from, to, start, end, char } = this.queue[i];
+        if (this.frame >= end) {
+          complete++;
+          output += to;
+        } else if (this.frame >= start) {
+          if (!char || Math.random() < 0.28) {
+            char = this.randomChar();
+            this.queue[i].char = char;
+          }
+          output += `<span style="color:var(--crimson-bright);opacity:0.95">${char}</span>`;
+        } else {
+          output += from;
+        }
+      }
+      this.el.innerHTML = output;
+      if (complete === this.queue.length) {
+        this.el.textContent = this.originalText;
+        this.isScrambling = false;
+      } else {
+        this.frameRequest = requestAnimationFrame(() => {
+          this.frame++;
+          this.update();
+        });
+      }
+    }
+
+    randomChar() {
+      return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+
+    scramble() {
+      if (this.isScrambling) return;
+      this.originalText = this.el.getAttribute('data-original') || this.el.textContent.trim();
+      this.el.setAttribute('data-original', this.originalText);
+      this.setText(this.originalText);
+    }
   }
+
+  // Attach TextScrambler to all designated elements
+  const scrambleElements = qa('[data-scramble], .nav-link, .section-badge, .project-name, .scope-company, .brand-name');
+  scrambleElements.forEach((el) => {
+    const scrambler = new TextScrambler(el);
+    el.addEventListener('mouseenter', () => scrambler.scramble());
+  });
+
+  // ==========================================================================
+  // 13. NUDOT MAGNETIC CURSOR & DYNAMIC MORPHING CAPSULE
+  // ==========================================================================
+  class NuDotCursorManager {
+    constructor() {
+      this.dot = q('#cursorDot');
+      this.ring = q('#cursorRing');
+      this.label = q('#cursorLabel');
+      this.glow = q('#cursorGlow');
+
+      if (!this.dot || !this.ring) return;
+
+      this.mouseX = window.innerWidth / 2;
+      this.mouseY = window.innerHeight / 2;
+      this.ringX = this.mouseX;
+      this.ringY = this.mouseY;
+      this.glowX = this.mouseX;
+      this.glowY = this.mouseY;
+
+      this.isActive = false;
+
+      this.init();
+    }
+
+    init() {
+      if (!window.matchMedia('(pointer: fine)').matches) {
+        if (this.dot) this.dot.style.display = 'none';
+        if (this.ring) this.ring.style.display = 'none';
+        return;
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        this.mouseX = e.clientX;
+        this.mouseY = e.clientY;
+
+        if (this.dot) {
+          this.dot.style.left = `${this.mouseX}px`;
+          this.dot.style.top = `${this.mouseY}px`;
+        }
+      });
+
+      const loop = () => {
+        const ease = this.isActive ? 0.22 : 0.15;
+        this.ringX += (this.mouseX - this.ringX) * ease;
+        this.ringY += (this.mouseY - this.ringY) * ease;
+
+        if (this.ring) {
+          this.ring.style.left = `${this.ringX}px`;
+          this.ring.style.top = `${this.ringY}px`;
+        }
+
+        this.glowX += (this.mouseX - this.glowX) * 0.08;
+        this.glowY += (this.mouseY - this.glowY) * 0.08;
+        if (this.glow) {
+          this.glow.style.transform = `translate(${this.glowX}px, ${this.glowY}px)`;
+        }
+
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+
+      // Attach hover states to all interactive elements
+      const hoverTargets = qa('[data-cursor], a, button, .arch-node, .project-showcase, .timeline-card, .skill-card, .sim-btn');
+      hoverTargets.forEach((target) => {
+        target.addEventListener('mouseenter', () => {
+          const customLabel = target.getAttribute('data-cursor') || (target.tagName === 'A' || target.tagName === 'BUTTON' ? 'OPEN' : 'EXPLORE');
+          this.setHoverState(true, customLabel);
+        });
+
+        target.addEventListener('mouseleave', () => {
+          this.setHoverState(false);
+        });
+      });
+    }
+
+    setHoverState(active, labelText = 'EXPLORE') {
+      this.isActive = active;
+      if (active) {
+        if (this.label) this.label.textContent = labelText;
+        if (this.ring) this.ring.classList.add('active-hover');
+        if (this.dot) this.dot.style.opacity = '0';
+      } else {
+        if (this.ring) this.ring.classList.remove('active-hover');
+        if (this.dot) this.dot.style.opacity = '1';
+      }
+    }
+  }
+
+  new NuDotCursorManager();
+
+  // ==========================================================================
+  // 14. LIVE DHAKA TELEMETRY CLOCK (NUDOT PATTERN)
+  // ==========================================================================
+  function initLiveClock() {
+    const clockEl = q('#navClock');
+    if (!clockEl) return;
+
+    const update = () => {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const dhakaTime = new Date(utc + (3600000 * 6));
+      const h = dhakaTime.getHours().toString().padStart(2, '0');
+      const m = dhakaTime.getMinutes().toString().padStart(2, '0');
+      const s = dhakaTime.getSeconds().toString().padStart(2, '0');
+      clockEl.textContent = `DHAKA [ ${h}:${m}:${s} UTC+6 ]`;
+    };
+
+    update();
+    setInterval(update, 1000);
+  }
+
+  initLiveClock();
 });
+

@@ -49,11 +49,25 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
+/* NuDot Subtle Dot-Matrix Grid Canvas Overlay */
+.nudot-grid-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: radial-gradient(rgba(255, 30, 66, 0.11) 1.2px, transparent 1.2px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
 body {
   overflow-x: hidden;
   background: var(--bg);
   min-height: 100vh;
   line-height: 1.6;
+  position: relative;
 }
 
 /* --------------------------------------------------------------------------
@@ -131,8 +145,76 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   INTERACTIVE CRIMSON CURSOR GLOW
+   NUDOT PRECISION MAGNETIC CURSOR & DYNAMIC MORPHING CAPSULE
    -------------------------------------------------------------------------- */
+.cursor-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999999;
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 7px;
+  height: 7px;
+  background: var(--crimson-bright);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 10000000;
+  box-shadow: 0 0 12px var(--crimson-bright);
+  transition: opacity 0.2s ease, transform 0.08s ease-out;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid rgba(255, 30, 66, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.28s ease,
+              background-color 0.28s ease,
+              border-color 0.28s ease,
+              box-shadow 0.28s ease;
+  will-change: transform;
+}
+
+.cursor-label {
+  font: 700 10.5px var(--font-mono);
+  color: #ffffff;
+  letter-spacing: 0.14em;
+  opacity: 0;
+  transform: scale(0.65);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.cursor-ring.active-hover {
+  width: 92px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(255, 30, 66, 0.92);
+  border-color: #ff4d6d;
+  box-shadow: 0 0 24px rgba(255, 30, 66, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.cursor-ring.active-hover .cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .cursor-glow {
   position: fixed;
   width: 600px;
@@ -186,6 +268,28 @@ body {
 }
 
 /* --------------------------------------------------------------------------
+   NUDOT CORNER CROSSHAIRS & TECHNICAL FRAMING
+   -------------------------------------------------------------------------- */
+.card-crosshairs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.card-crosshairs .ch {
+  position: absolute;
+  font: 300 13px var(--font-mono);
+  color: rgba(255, 30, 66, 0.45);
+  line-height: 1;
+}
+
+.ch-tl { top: 8px; left: 10px; }
+.ch-tr { top: 8px; right: 10px; }
+.ch-bl { bottom: 8px; left: 10px; }
+.ch-br { bottom: 8px; right: 10px; }
+
+/* --------------------------------------------------------------------------
    GLASS CARDS & BADGES (BLACK & RED SHADES)
    -------------------------------------------------------------------------- */
 .glass-card {
@@ -235,6 +339,69 @@ body {
 .tag-crimson { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.45); }
 .tag-ruby { background: rgba(225, 29, 72, 0.2); color: #fda4af; border: 1px solid rgba(225, 29, 72, 0.45); }
 .tag-wine { background: rgba(153, 27, 27, 0.25); color: #fecaca; border: 1px solid rgba(153, 27, 27, 0.5); }
+
+/* --------------------------------------------------------------------------
+   NUDOT KINETIC MARQUEE RIBBONS
+   -------------------------------------------------------------------------- */
+.nudot-marquee-strip {
+  width: 100%;
+  overflow: hidden;
+  background: rgba(8, 4, 7, 0.95);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+  display: flex;
+  user-select: none;
+  position: relative;
+  z-index: 10;
+}
+
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 48px;
+  align-items: center;
+  animation: marqueeScroll 32s linear infinite;
+}
+
+.reverse-marquee .marquee-track {
+  animation: marqueeScrollReverse 32s linear infinite;
+}
+
+.marquee-item {
+  font: 700 12.5px var(--font-mono);
+  color: #f1f5f9;
+  letter-spacing: 0.16em;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
+}
+
+.marquee-dot {
+  color: var(--crimson-bright);
+  font-size: 11px;
+  text-shadow: 0 0 8px var(--crimson-bright);
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marqueeScrollReverse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0%); }
+}
+
+/* Project Numbering */
+.project-nudot-num {
+  font: 700 12px var(--font-mono);
+  color: var(--crimson-bright);
+  letter-spacing: 0.14em;
+  margin-bottom: 6px;
+  display: inline-block;
+}
 
 /* --------------------------------------------------------------------------
    BUTTONS
@@ -314,14 +481,14 @@ body {
   padding: 18px 48px;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  background: rgba(4, 4, 6, 0.85);
+  background: rgba(4, 4, 6, 0.88);
   border-bottom: 1px solid var(--line);
   transition: padding var(--transition-smooth), background var(--transition-smooth);
 }
 
 .nav.scrolled {
   padding: 12px 48px;
-  background: rgba(4, 4, 6, 0.96);
+  background: rgba(4, 4, 6, 0.98);
   border-bottom-color: var(--line-highlight);
 }
 
@@ -376,16 +543,17 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
 .nav-link {
-  font: 500 13px var(--font-sans);
+  font: 500 11.5px var(--font-mono);
   color: var(--muted);
   text-decoration: none;
   transition: color var(--transition-fast);
   position: relative;
   padding: 6px 0;
+  letter-spacing: 0.06em;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -407,10 +575,10 @@ body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 
-.status-pill {
+.nav-telemetry-box {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -420,6 +588,15 @@ body {
   padding: 6px 14px;
   border-radius: 999px;
   border: 1px solid var(--line);
+  letter-spacing: 0.05em;
+}
+
+.status-dot.online {
+  width: 6px;
+  height: 6px;
+  background: var(--crimson-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--crimson-bright);
 }
 
 .status-dot.online {

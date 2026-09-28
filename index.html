@@ -34,54 +34,66 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="/src/style.css">
 </head>
 
 <body>
+  <!-- NuDot Subtle Dot-Matrix Canvas Layer -->
+  <div class="nudot-grid-canvas" aria-hidden="true"></div>
+
   <!-- Preloader with Crimson Engineering Telemetry -->
   <div id="loader">
     <div class="loader-content">
-      <div class="loader-badge"><span class="pulse-dot"></span> SYSTEM KERNEL · MD. SAZZADUL ISLAM (SAZIB)</div>
-      <h1 class="loader-title">MD. SAZZADUL ISLAM</h1>
-      <p class="loader-subtitle">Assistant Lead Engineer · bKash Limited</p>
+      <div class="loader-badge"><span class="pulse-dot"></span> [ SYSTEM KERNEL · MD. SAZZADUL ISLAM (SAZIB) ]</div>
+      <h1 class="loader-title" data-scramble>MD. SAZZADUL ISLAM</h1>
+      <p class="loader-subtitle">[ Assistant Lead Engineer · bKash Limited ]</p>
       <div class="loader-meter">
         <div class="loader-progress"></div>
       </div>
-      <div class="loader-status"><span>SYNCHRONIZING FINTECH, REVORA AI & UX TELEMETRY</span><span
-          id="loadPercent">0%</span></div>
+      <div class="loader-status">
+        <span>INITIALIZING FINTECH, REVORA AI & UX TOPOLOGY</span>
+        <span id="loadPercent">0%</span>
+      </div>
     </div>
   </div>
 
-  <!-- Interactive Crimson Cursor Glow -->
+  <!-- NuDot Precision Magnetic Cursor & Dynamic Morphing Capsule -->
+  <div class="cursor-wrapper" id="cursorWrapper">
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing">
+      <span class="cursor-label" id="cursorLabel">EXPLORE</span>
+    </div>
+  </div>
   <div class="cursor-glow" id="cursorGlow"></div>
 
-  <!-- Global Header / Navbar -->
+  <!-- Global Header / Navbar with NuDot Monospace Telemetry -->
   <header class="nav" id="mainNav">
-    <a class="brand" href="#top">
+    <a class="brand" href="#top" data-cursor="HOME">
       <span class="brand-logo">SI</span>
       <div class="brand-meta">
-        <span class="brand-name">Md. Sazzadul Islam <small class="nick-tag">(Sazib)</small></span>
-        <span class="brand-sub">Assistant Lead Engineer · bKash Ltd</span>
+        <span class="brand-name" data-scramble>Md. Sazzadul Islam <small class="nick-tag">(Sazib)</small></span>
+        <span class="brand-sub">[ Assistant Lead Engineer · bKash Ltd ]</span>
       </div>
     </a>
 
     <nav class="nav-links">
-      <a href="#hero" class="nav-link active" data-nav="hero">Overview</a>
-      <a href="#journey" class="nav-link" data-nav="journey">Career & Education</a>
-      <a href="#projects" class="nav-link" data-nav="projects">Key Products</a>
-      <a href="#architecture" class="nav-link" data-nav="architecture">Architecture</a>
-      <a href="#skills" class="nav-link" data-nav="skills">Tech Matrix</a>
-      <a href="#impact" class="nav-link" data-nav="impact">Impact</a>
+      <a href="#hero" class="nav-link active" data-nav="hero" data-scramble data-cursor="VIEW">[ 01 // OVERVIEW ]</a>
+      <a href="#journey" class="nav-link" data-nav="journey" data-scramble data-cursor="VIEW">[ 02 // CAREER ]</a>
+      <a href="#projects" class="nav-link" data-nav="projects" data-scramble data-cursor="VIEW">[ 03 // PRODUCTS ]</a>
+      <a href="#architecture" class="nav-link" data-nav="architecture" data-scramble data-cursor="VIEW">[ 04 // TOPOLOGY ]</a>
+      <a href="#skills" class="nav-link" data-nav="skills" data-scramble data-cursor="VIEW">[ 05 // MATRIX ]</a>
+      <a href="#impact" class="nav-link" data-nav="impact" data-scramble data-cursor="VIEW">[ 06 // IMPACT ]</a>
     </nav>
 
     <div class="nav-actions">
-      <div class="status-pill">
+      <!-- Live Dhaka Telemetry Clock (NuDot Pattern) -->
+      <div class="nav-telemetry-box" id="navClockBox" title="Dhaka Standard Time (UTC+6)">
         <span class="status-dot online"></span>
-        <span class="status-text">Team Lead · bKash Forest</span>
+        <span class="nav-clock font-mono" id="navClock">DHAKA 00:00:00 UTC+6</span>
       </div>
-      <a href="#contact" class="btn btn-primary btn-sm">Get In Touch ↗</a>
+      <a href="#contact" class="btn btn-primary btn-sm" data-scramble data-cursor="CONNECT">Get In Touch ↗</a>
     </div>
   </header>
 
@@ -100,17 +112,21 @@
         <div class="hero-split-container">
           <!-- Left Copy -->
           <div class="hero-copy glass-card-panel">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="hero-tag-wrap">
-              <span class="badge badge-red">bKash Limited · Assistant Lead</span>
-              <span class="badge badge-crimson">Team Lead · bKash Forest</span>
-              <span class="badge badge-ruby">Alice Labs (Revora AI)</span>
-              <span class="badge badge-wine">Ex-Mayalogy (UI/UX)</span>
-              <span class="badge badge-muted">BRAC Univ CSE</span>
+              <span class="badge badge-red">[ bKash Limited · Assistant Lead ]</span>
+              <span class="badge badge-crimson">[ Team Lead · bKash Forest ]</span>
+              <span class="badge badge-ruby">[ Alice Labs · Revora AI ]</span>
+              <span class="badge badge-wine">[ Ex-Mayalogy · UI/UX ]</span>
+              <span class="badge badge-muted">[ BRAC Univ CSE ]</span>
             </div>
 
             <h1 class="hero-title">
-              Engineering <span class="text-glow-red">National FinTech</span> & <br>
-              <span class="text-glow-crimson">Green Products</span> at Scale.
+              Engineering <span class="text-glow-red" data-scramble>National FinTech</span> & <br>
+              <span class="text-glow-crimson" data-scramble>Green Products</span> at Scale.
             </h1>
 
             <p class="hero-sub">
@@ -123,16 +139,17 @@
             </p>
 
             <div class="hero-ctas">
-              <a href="#projects" class="btn btn-primary">
+              <a href="#projects" class="btn btn-primary" data-cursor="EXPLORE" data-scramble>
                 <span>Explore Key Products</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
               </a>
-              <a href="#journey" class="btn btn-glass">
+              <a href="#journey" class="btn btn-glass" data-cursor="TIMELINE" data-scramble>
                 <span>View Career Timeline</span>
               </a>
             </div>
+          </div>
           </div>
 
           <!-- Right: Work Scoped Timeline Card (Dynamically Synchronized with Scroll Video Frames) -->
@@ -200,18 +217,44 @@
 
         <!-- Bottom Telemetry HUD Bar -->
         <div class="video-meta">
-          <span class="video-meta-tag"><span class="live-dot"></span> SCROLL-DRIVEN VIDEO FRAME PLAYBACK</span>
-          <span class="scroll-instruction">Scroll down to advance video & work timeline ↓</span>
-          <span id="fpsCounter" class="font-mono">60 FPS · GPU</span>
+          <span class="video-meta-tag"><span class="live-dot"></span> [ SCROLL-DRIVEN 60FPS VIDEO ENGINE ]</span>
+          <span class="scroll-instruction">Scroll to advance video frame & career timeline ↓</span>
+          <span id="fpsCounter" class="font-mono">60 FPS · GPU ACCELERATED</span>
         </div>
       </div>
     </section>
+
+    <!-- NUDOT KINETIC MARQUEE RIBBON 01 -->
+    <div class="nudot-marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">FINTECH ARCHITECTURE <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">50M+ ACTIVE USERS <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">bKASH FOREST (1.2M+ TREES) <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">IDS 5,000 TPS BATCH <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">G2P EFT NATIONAL DISBURSEMENT <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">REVORA AI CHATBOT BUILDER <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">WHATSAPP AUTOMATION <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">MAYALOGY UI/UX DESIGN <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">BRAC UNIVERSITY CSE <span class="marquee-dot">✦</span></span>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        <span class="marquee-item">FINTECH ARCHITECTURE <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">50M+ ACTIVE USERS <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">bKASH FOREST (1.2M+ TREES) <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">IDS 5,000 TPS BATCH <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">G2P EFT NATIONAL DISBURSEMENT <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">REVORA AI CHATBOT BUILDER <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">WHATSAPP AUTOMATION <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">MAYALOGY UI/UX DESIGN <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">BRAC UNIVERSITY CSE <span class="marquee-dot">✦</span></span>
+      </div>
+    </div>
 
     <!-- 02. CAREER & EDUCATION TIMELINE -->
     <section class="section-pad journey-section" id="journey">
       <div class="section-container">
         <div class="section-header">
-          <div class="section-badge">01 // CAREER & EDUCATION</div>
+          <div class="section-badge" data-scramble>[ 01 // CAREER & EDUCATION ]</div>
           <h2 class="section-title">Engineering Journey & <span class="gradient-text">Milestones.</span></h2>
           <p class="section-desc">From BRAC University CSE foundations and UI/UX design at Mayalogy, to AI chatbot
             solutions at Singapore-based Alice Labs (Revora), and leading FinTech & Green innovation at bKash.</p>
@@ -223,18 +266,22 @@
           </div>
 
           <!-- Stage 4: bKash Limited (Present) -->
-          <div class="timeline-card current-role">
+          <div class="timeline-card current-role" data-cursor="EXPAND">
             <div class="timeline-marker">
               <span class="pulse-ring"></span>
               <span class="marker-core bKash-core"></span>
             </div>
             <div class="timeline-card-inner glass-card">
+              <div class="card-crosshairs" aria-hidden="true">
+                <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+                <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+              </div>
               <div class="card-meta">
                 <span class="company-tag bkash-tag">bKash Limited</span>
-                <span class="time-period">2021 — Present · Assistant Lead Engineer</span>
-                <span class="role-badge">Team Lead (bKash Forest)</span>
+                <span class="time-period">[ 2021 — Present · Assistant Lead Engineer ]</span>
+                <span class="role-badge">[ Team Lead · bKash Forest ]</span>
               </div>
-              <h3 class="card-role-title">bKash Forest, IDS, G2P EFT Solution & Merchant Self-Service</h3>
+              <h3 class="card-role-title" data-scramble>bKash Forest, IDS, G2P EFT Solution & Merchant Self-Service</h3>
               <p class="card-summary">
                 Serving as Assistant Lead Engineer at bKash Limited (50M+ users). Team Lead for <strong>bKash
                   Forest</strong> and delivered major FinTech platforms including <strong>IDS (Instant Disbursement
@@ -276,17 +323,21 @@
           </div>
 
           <!-- Stage 3: Alice Labs Pte. Ltd. (Singapore) -->
-          <div class="timeline-card">
+          <div class="timeline-card" data-cursor="EXPAND">
             <div class="timeline-marker">
               <span class="marker-core myalice-core"></span>
             </div>
             <div class="timeline-card-inner glass-card">
+              <div class="card-crosshairs" aria-hidden="true">
+                <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+                <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+              </div>
               <div class="card-meta">
                 <span class="company-tag myalice-tag">Alice Labs Pte. Ltd. (Singapore)</span>
-                <span class="time-period">2018 — 2021 · 3 Years</span>
-                <span class="role-badge">Senior Software Engineer / Lead AI & Integrations</span>
+                <span class="time-period">[ 2018 — 2021 · 3 Years ]</span>
+                <span class="role-badge">[ Lead AI & Integrations · Revora ]</span>
               </div>
-              <h3 class="card-role-title">AI Chatbot Builder, WhatsApp Solutions & Revora Ecosystem</h3>
+              <h3 class="card-role-title" data-scramble>AI Chatbot Builder, WhatsApp Solutions & Revora Ecosystem</h3>
               <p class="card-summary">
                 Engineered the core <strong>AI Chatbot Builder</strong>, WhatsApp-based conversational engagement
                 solutions, and omnichannel messaging connectors at Singapore-headquartered Alice Labs (whose flagship AI
@@ -316,17 +367,21 @@
           </div>
 
           <!-- Stage 2: Mayalogy Limited -->
-          <div class="timeline-card">
+          <div class="timeline-card" data-cursor="EXPAND">
             <div class="timeline-marker">
               <span class="marker-core mayalogy-core"></span>
             </div>
             <div class="timeline-card-inner glass-card">
+              <div class="card-crosshairs" aria-hidden="true">
+                <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+                <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+              </div>
               <div class="card-meta">
                 <span class="company-tag mayalogy-tag">Mayalogy Limited</span>
-                <span class="time-period">2017 — 2018 · 1 Year</span>
-                <span class="role-badge">UI/UX Designer</span>
+                <span class="time-period">[ 2017 — 2018 · 1 Year ]</span>
+                <span class="role-badge">[ UI/UX Designer ]</span>
               </div>
-              <h3 class="card-role-title">UI/UX Designer — Empowering Healthcare & Digital Services</h3>
+              <h3 class="card-role-title" data-scramble>UI/UX Designer — Empowering Healthcare & Digital Services</h3>
               <p class="card-summary">
                 Worked as a <strong>UI/UX Designer for 1 year</strong> at Mayalogy Limited, creating user-centric
                 interface designs and seamless UX flows for an online platform helping thousands of people ask health
@@ -351,17 +406,21 @@
           </div>
 
           <!-- Stage 1: BRAC University -->
-          <div class="timeline-card">
+          <div class="timeline-card" data-cursor="EXPAND">
             <div class="timeline-marker">
               <span class="marker-core brac-core"></span>
             </div>
             <div class="timeline-card-inner glass-card">
+              <div class="card-crosshairs" aria-hidden="true">
+                <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+                <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+              </div>
               <div class="card-meta">
                 <span class="company-tag brac-tag">BRAC University</span>
-                <span class="time-period">2012 — 2016 · 4 Years</span>
-                <span class="role-badge">Academic Degree</span>
+                <span class="time-period">[ 2012 — 2016 · 4 Years ]</span>
+                <span class="role-badge">[ Academic Degree ]</span>
               </div>
-              <h3 class="card-role-title">Bachelor of Science in Computer Science & Engineering (B.Sc. in CSE)</h3>
+              <h3 class="card-role-title" data-scramble>Bachelor of Science in Computer Science & Engineering (B.Sc. in CSE)</h3>
               <p class="card-summary">
                 Graduated from one of the top computer science institutions in Bangladesh. Built strong foundations in
                 Data Structures, Algorithms, Distributed Computing, Database Management Systems, and Object-Oriented
@@ -381,7 +440,7 @@
     <section class="section-pad projects-section" id="projects">
       <div class="section-container">
         <div class="section-header">
-          <div class="section-badge">02 // SIGNATURE PRODUCTS</div>
+          <div class="section-badge" data-scramble>[ 02 // SIGNATURE PRODUCTS ]</div>
           <h2 class="section-title">FinTech Products & <span class="gradient-text">Key Systems Delivered.</span></h2>
           <p class="section-desc">Key systems architected and led at bKash Limited, Alice Labs Singapore (Revora), and
             Mayalogy.</p>
@@ -389,18 +448,23 @@
 
         <div class="projects-grid">
           <!-- PRODUCT 1: bKash Forest -->
-          <article class="project-showcase glass-card" data-project="forest">
+          <article class="project-showcase glass-card" data-project="forest" data-cursor="VIEW">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="project-image-wrap">
               <img src="/assets/bkash-forest.jpg" alt="bKash Forest Green FinTech Platform" class="project-img"
                 loading="lazy" />
               <div class="project-overlay">
-                <span class="tag-pill tag-crimson">🌿 Team Lead · Green FinTech</span>
+                <span class="tag-pill tag-crimson">[ 🌿 Team Lead · Green FinTech ]</span>
               </div>
             </div>
             <div class="project-details">
               <div class="project-top">
-                <span class="project-client">bKash Limited · Team Lead</span>
-                <h3 class="project-name">bKash Forest: Digital Sustainability Ecosystem</h3>
+                <div class="project-nudot-num font-mono">01 / BKASH FOREST</div>
+                <span class="project-client">[ bKash Limited · Team Lead ]</span>
+                <h3 class="project-name" data-scramble>bKash Forest: Digital Sustainability Ecosystem</h3>
               </div>
               <p class="project-desc">
                 An innovative green fintech product gamifying everyday financial actions (DPS savings, utility bills,
@@ -418,7 +482,7 @@
                 <span>Go</span><span>Event-driven Kafka</span><span>Gamification
                   Engine</span><span>Geo-Telemetry</span><span>PostgreSQL</span>
               </div>
-              <button class="btn btn-outline btn-block open-modal-btn" data-target="modal-forest">
+              <button class="btn btn-outline btn-block open-modal-btn" data-target="modal-forest" data-cursor="SPECS">
                 <span>View System Architecture</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -428,18 +492,23 @@
           </article>
 
           <!-- PRODUCT 2: IDS, G2P EFT & Payroll Hub -->
-          <article class="project-showcase glass-card" data-project="disbursement">
+          <article class="project-showcase glass-card" data-project="disbursement" data-cursor="VIEW">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="project-image-wrap">
               <img src="/assets/bkash-disbursement.jpg" alt="bKash IDS and G2P EFT Hub" class="project-img"
                 loading="lazy" />
               <div class="project-overlay">
-                <span class="tag-pill tag-red">💰 IDS, G2P EFT & Payroll</span>
+                <span class="tag-pill tag-red">[ 💰 IDS, G2P EFT & Payroll ]</span>
               </div>
             </div>
             <div class="project-details">
               <div class="project-top">
-                <span class="project-client">bKash Limited · Assistant Lead</span>
-                <h3 class="project-name">IDS, G2P EFT Solution & Payroll Engine</h3>
+                <div class="project-nudot-num font-mono">02 / IDS & G2P EFT</div>
+                <span class="project-client">[ bKash Limited · Assistant Lead ]</span>
+                <h3 class="project-name" data-scramble>IDS, G2P EFT Solution & Payroll Engine</h3>
               </div>
               <p class="project-desc">
                 High-throughput automated batch and instant disbursement pipeline handling corporate payroll
@@ -457,7 +526,7 @@
                 <span>Java Spring Boot</span><span>Go</span><span>Distributed Sagas</span><span>Batch
                   Processing</span><span>Redis Cluster</span>
               </div>
-              <button class="btn btn-outline btn-block open-modal-btn" data-target="modal-disbursement">
+              <button class="btn btn-outline btn-block open-modal-btn" data-target="modal-disbursement" data-cursor="SPECS">
                 <span>View IDS & G2P Architecture</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -467,18 +536,23 @@
           </article>
 
           <!-- PRODUCT 3: Alice Labs (Revora) AI Chatbot Builder -->
-          <article class="project-showcase glass-card" data-project="myalice">
+          <article class="project-showcase glass-card" data-project="myalice" data-cursor="VIEW">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="project-image-wrap">
               <img src="/assets/myalice-ai.jpg" alt="Alice Labs AI Chatbot Builder Revora" class="project-img"
                 loading="lazy" />
               <div class="project-overlay">
-                <span class="tag-pill tag-ruby">🤖 Alice Labs Singapore · Revora</span>
+                <span class="tag-pill tag-ruby">[ 🤖 Alice Labs · Revora AI ]</span>
               </div>
             </div>
             <div class="project-details">
               <div class="project-top">
-                <span class="project-client">Alice Labs Pte. Ltd. (Singapore)</span>
-                <h3 class="project-name">AI Chatbot Builder & WhatsApp Solutions (Revora)</h3>
+                <div class="project-nudot-num font-mono">03 / REVORA AI BUILDER</div>
+                <span class="project-client">[ Alice Labs Pte. Ltd. Singapore ]</span>
+                <h3 class="project-name" data-scramble>AI Chatbot Builder & WhatsApp Solutions (Revora)</h3>
               </div>
               <p class="project-desc">
                 Omnichannel AI chatbot builder and WhatsApp business solutions integrating NLP intent classifiers for
@@ -496,7 +570,7 @@
                 <span>Python</span><span>FastAPI</span><span>NLP Transformers</span><span>WhatsApp
                   API</span><span>WebSockets</span>
               </div>
-              <button class="btn btn-outline btn-block open-modal-btn" data-target="modal-myalice">
+              <button class="btn btn-outline btn-block open-modal-btn" data-target="modal-myalice" data-cursor="SPECS">
                 <span>View Chatbot Builder Details</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -506,18 +580,23 @@
           </article>
 
           <!-- PRODUCT 4: Mayalogy UI/UX Design & Digital Health -->
-          <article class="project-showcase glass-card" data-project="mayalogy">
+          <article class="project-showcase glass-card" data-project="mayalogy" data-cursor="VIEW">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="project-image-wrap">
               <img src="/assets/distributed-systems.jpg" alt="Mayalogy Digital Health UI/UX Design" class="project-img"
                 loading="lazy" />
               <div class="project-overlay">
-                <span class="tag-pill tag-wine">🎨 Mayalogy UI/UX Design</span>
+                <span class="tag-pill tag-wine">[ 🎨 Mayalogy · UI/UX Design ]</span>
               </div>
             </div>
             <div class="project-details">
               <div class="project-top">
-                <span class="project-client">Mayalogy Limited · 2017–2018</span>
-                <h3 class="project-name">Healthcare Q&A & Digital Services UX</h3>
+                <div class="project-nudot-num font-mono">04 / HEALTHCARE UX</div>
+                <span class="project-client">[ Mayalogy Limited · 2017–2018 ]</span>
+                <h3 class="project-name" data-scramble>Healthcare Q&A & Digital Services UX</h3>
               </div>
               <p class="project-desc">
                 User experience and interface architecture for an accessible digital healthcare Q&A platform, enabling
@@ -535,7 +614,7 @@
                 <span>UI/UX Design</span><span>User
                   Research</span><span>Wireframing</span><span>Prototyping</span><span>Design Systems</span>
               </div>
-              <button class="btn btn-outline btn-block open-modal-btn" data-target="modal-mayalogy">
+              <button class="btn btn-outline btn-block open-modal-btn" data-target="modal-mayalogy" data-cursor="SPECS">
                 <span>View UI/UX Design Specs</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -551,20 +630,24 @@
     <section class="section-pad architecture-section" id="architecture">
       <div class="section-container">
         <div class="section-header">
-          <div class="section-badge">03 // SYSTEM TOPOLOGY</div>
+          <div class="section-badge" data-scramble>[ 03 // SYSTEM TOPOLOGY ]</div>
           <h2 class="section-title">FinTech, IDS, G2P & <span class="gradient-text">Green Ecosystem.</span></h2>
           <p class="section-desc">Interactive topology illustrating how national transactions, IDS batches, G2P EFT
             grants, and merchant self-service feed seamlessly into bKash Forest.</p>
         </div>
 
         <div class="architecture-diagram glass-card">
+          <div class="card-crosshairs" aria-hidden="true">
+            <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+            <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+          </div>
           <div class="arch-top-bar">
-            <div class="arch-status"><span class="pulse-dot"></span> LIVE ARCHITECTURAL TOPOLOGY SIMULATOR</div>
+            <div class="arch-status"><span class="pulse-dot"></span> [ LIVE ARCHITECTURAL TOPOLOGY SIMULATOR ]</div>
             <div class="arch-tabs">
-              <button class="arch-tab active" data-flow="all">Complete Ecosystem</button>
-              <button class="arch-tab" data-flow="disbursement">IDS & G2P EFT Flow</button>
-              <button class="arch-tab" data-flow="forest">bKash Forest Green Flow</button>
-              <button class="arch-tab" data-flow="ai">Alice Labs Revora AI Flow</button>
+              <button class="arch-tab active" data-flow="all" data-cursor="FILTER">Complete Ecosystem</button>
+              <button class="arch-tab" data-flow="disbursement" data-cursor="FILTER">IDS & G2P EFT Flow</button>
+              <button class="arch-tab" data-flow="forest" data-cursor="FILTER">bKash Forest Green Flow</button>
+              <button class="arch-tab" data-flow="ai" data-cursor="FILTER">Alice Labs Revora AI Flow</button>
             </div>
           </div>
 
@@ -606,67 +689,67 @@
 
             <div class="arch-nodes-grid">
               <!-- Node 1 -->
-              <div class="arch-node" id="node-client" data-node="client">
+              <div class="arch-node" id="node-client" data-node="client" data-cursor="PULSE">
                 <div class="node-icon">📱</div>
                 <div class="node-content">
                   <h4>50M+ User Clients & Corporates</h4>
                   <p>bKash Mobile App, USSD & Corporate Portals</p>
-                  <span class="node-badge">HTTP/3 & mTLS</span>
+                  <span class="node-badge">[ HTTP/3 & mTLS ]</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
               <!-- Node 2 -->
-              <div class="arch-node node-highlight-red" id="node-gateway" data-node="gateway">
+              <div class="arch-node node-highlight-red" id="node-gateway" data-node="gateway" data-cursor="PULSE">
                 <div class="node-icon">🛡️</div>
                 <div class="node-content">
                   <h4>API Gateway & Self-Service</h4>
                   <p>Rate Limiting, HMAC Auth, Merchant Verification</p>
-                  <span class="node-badge badge-red">Kong / Envoy Gateway</span>
+                  <span class="node-badge badge-red">[ Kong / Envoy Gateway ]</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
               <!-- Node 3 -->
-              <div class="arch-node node-highlight-red" id="node-engine" data-node="engine">
+              <div class="arch-node node-highlight-red" id="node-engine" data-node="engine" data-cursor="PULSE">
                 <div class="node-icon">💰</div>
                 <div class="node-content">
                   <h4>IDS & G2P EFT Engine</h4>
                   <p>Instant & Batch Orchestrator, Sagas</p>
-                  <span class="node-badge badge-red">Go / Java Spring Boot</span>
+                  <span class="node-badge badge-red">[ Go / Java Spring Boot ]</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
               <!-- Node 4 -->
-              <div class="arch-node" id="node-kafka" data-node="kafka">
+              <div class="arch-node" id="node-kafka" data-node="kafka" data-cursor="PULSE">
                 <div class="node-icon">🔄</div>
                 <div class="node-content">
                   <h4>Kafka Event Fabric</h4>
                   <p>High-Throughput Partitioned Event Stream</p>
-                  <span class="node-badge">Kafka Broker Cluster</span>
+                  <span class="node-badge">[ Kafka Broker Cluster ]</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
               <!-- Node 5 -->
-              <div class="arch-node node-highlight-crimson" id="node-forest" data-node="forest">
+              <div class="arch-node node-highlight-crimson" id="node-forest" data-node="forest" data-cursor="PULSE">
                 <div class="node-icon">🌿</div>
                 <div class="node-content">
                   <h4>bKash Forest Engine (Team Lead)</h4>
                   <p>Eco-Gamification, Tree Planting & CO₂ Ledger</p>
-                  <span class="node-badge badge-crimson">Green FinTech Microservice</span>
+                  <span class="node-badge badge-crimson">[ Green FinTech Microservice ]</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
 
               <!-- Node 6 -->
-              <div class="arch-node node-highlight-ruby" id="node-ai" data-node="ai">
+              <div class="arch-node node-highlight-ruby" id="node-ai" data-node="ai" data-cursor="PULSE">
                 <div class="node-icon">🤖</div>
                 <div class="node-content">
                   <h4>Alice Labs Revora AI Builder</h4>
                   <p>NLP Intent Classifier & WhatsApp Bridge</p>
-                  <span class="node-badge badge-ruby">Python / Transformers</span>
+                  <span class="node-badge badge-ruby">[ Python / Transformers ]</span>
                 </div>
                 <div class="node-pulse-halo"></div>
               </div>
@@ -679,7 +762,7 @@
               <span><i class="dot dot-crimson"></i> bKash Forest Green Action</span>
               <span><i class="dot dot-ruby"></i> Revora AI & WhatsApp</span>
             </div>
-            <div class="arch-benchmark">
+            <div class="arch-benchmark font-mono">
               <span>BENCHMARK: <strong>&lt; 45ms P99 Latency</strong></span>
               <span>IDEMPOTENCY: <strong>100% Guaranteed</strong></span>
             </div>
@@ -688,11 +771,35 @@
       </div>
     </section>
 
+    <!-- NUDOT KINETIC MARQUEE RIBBON 02 -->
+    <div class="nudot-marquee-strip reverse-marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">ZERO-LOSS IDEMPOTENCY <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">DISTRIBUTED SAGAS <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">KAFKA EVENT STREAMING <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">REDIS IN-MEMORY CACHE <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">GEO-TELEMETRY GIS <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">99.999% HIGH AVAILABILITY <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">NLP INTENT CLASSIFICATION <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">USER-CENTERED DESIGN SYSTEMS <span class="marquee-dot">✦</span></span>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        <span class="marquee-item">ZERO-LOSS IDEMPOTENCY <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">DISTRIBUTED SAGAS <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">KAFKA EVENT STREAMING <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">REDIS IN-MEMORY CACHE <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">GEO-TELEMETRY GIS <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">99.999% HIGH AVAILABILITY <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">NLP INTENT CLASSIFICATION <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">USER-CENTERED DESIGN SYSTEMS <span class="marquee-dot">✦</span></span>
+      </div>
+    </div>
+
     <!-- 05. TECHNICAL MATRIX -->
     <section class="section-pad skills-section" id="skills">
       <div class="section-container">
         <div class="section-header">
-          <div class="section-badge">04 // TECHNICAL ARSENAL</div>
+          <div class="section-badge" data-scramble>[ 04 // TECHNICAL ARSENAL ]</div>
           <h2 class="section-title">Core Engineering & <span class="gradient-text">Design Disciplines.</span></h2>
           <p class="section-desc">Technologies, architecture, and UX methodologies applied across bKash, Alice Labs
             Singapore, and Mayalogy since 2017.</p>
@@ -700,21 +807,25 @@
 
         <!-- Filter Pills -->
         <div class="skills-filter">
-          <button class="filter-pill active" data-filter="all">All Disciplines</button>
-          <button class="filter-pill" data-filter="fintech">FinTech, IDS & G2P</button>
-          <button class="filter-pill" data-filter="ai">AI Chatbots & WhatsApp</button>
-          <button class="filter-pill" data-filter="ux">UI/UX & Design</button>
-          <button class="filter-pill" data-filter="cloud">Cloud & Data</button>
+          <button class="filter-pill active" data-filter="all" data-cursor="FILTER">All Disciplines</button>
+          <button class="filter-pill" data-filter="fintech" data-cursor="FILTER">FinTech, IDS & G2P</button>
+          <button class="filter-pill" data-filter="ai" data-cursor="FILTER">AI Chatbots & WhatsApp</button>
+          <button class="filter-pill" data-filter="ux" data-cursor="FILTER">UI/UX & Design</button>
+          <button class="filter-pill" data-filter="cloud" data-cursor="FILTER">Cloud & Data</button>
         </div>
 
         <div class="skills-grid">
           <!-- FinTech / Systems -->
-          <div class="skill-card glass-card" data-category="fintech">
+          <div class="skill-card glass-card" data-category="fintech" data-cursor="TECH">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="skill-header">
               <div class="skill-icon-box">💰</div>
               <div>
-                <h4>IDS & G2P EFT Systems</h4>
-                <span class="skill-years">bKash Limited · Lead</span>
+                <h4 data-scramble>IDS & G2P EFT Systems</h4>
+                <span class="skill-years">[ bKash Limited · Lead ]</span>
               </div>
             </div>
             <p class="skill-desc">Engineered IDS (Instant Disbursement), G2P EFT government grant distribution, and
@@ -724,12 +835,16 @@
             </div>
           </div>
 
-          <div class="skill-card glass-card" data-category="fintech">
+          <div class="skill-card glass-card" data-category="fintech" data-cursor="TECH">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="skill-header">
               <div class="skill-icon-box">🌿</div>
               <div>
-                <h4>Green FinTech & Gamification</h4>
-                <span class="skill-years">Team Lead · bKash Forest</span>
+                <h4 data-scramble>Green FinTech & Gamification</h4>
+                <span class="skill-years">[ Team Lead · bKash Forest ]</span>
               </div>
             </div>
             <p class="skill-desc">Led bKash Forest green platform: automated micro-transaction eco-rewards, GIS tree
@@ -740,12 +855,16 @@
           </div>
 
           <!-- AI / Chatbots -->
-          <div class="skill-card glass-card" data-category="ai">
+          <div class="skill-card glass-card" data-category="ai" data-cursor="TECH">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="skill-header">
               <div class="skill-icon-box">🤖</div>
               <div>
-                <h4>AI Chatbot Builder & NLP</h4>
-                <span class="skill-years">Alice Labs (Revora)</span>
+                <h4 data-scramble>AI Chatbot Builder & NLP</h4>
+                <span class="skill-years">[ Alice Labs · Revora ]</span>
               </div>
             </div>
             <p class="skill-desc">Built conversational AI chatbot builder, multi-turn dialogue managers, and custom NLP
@@ -755,12 +874,16 @@
             </div>
           </div>
 
-          <div class="skill-card glass-card" data-category="ai">
+          <div class="skill-card glass-card" data-category="ai" data-cursor="TECH">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="skill-header">
               <div class="skill-icon-box">💬</div>
               <div>
-                <h4>WhatsApp-Based Solutions</h4>
-                <span class="skill-years">Alice Labs (Singapore)</span>
+                <h4 data-scramble>WhatsApp-Based Solutions</h4>
+                <span class="skill-years">[ Alice Labs · Singapore ]</span>
               </div>
             </div>
             <p class="skill-desc">WhatsApp Business API, Messenger Graph API, Instagram Webhooks, automated commerce
@@ -771,12 +894,16 @@
           </div>
 
           <!-- UI/UX Design -->
-          <div class="skill-card glass-card" data-category="ux">
+          <div class="skill-card glass-card" data-category="ux" data-cursor="TECH">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="skill-header">
               <div class="skill-icon-box">🎨</div>
               <div>
-                <h4>UI/UX Design & Research</h4>
-                <span class="skill-years">Mayalogy (1 Year UI/UX)</span>
+                <h4 data-scramble>UI/UX Design & Research</h4>
+                <span class="skill-years">[ Mayalogy · 1 Yr UI/UX ]</span>
               </div>
             </div>
             <p class="skill-desc">User-centered design for digital healthcare Q&A: user journey mapping, high-fidelity
@@ -787,12 +914,16 @@
           </div>
 
           <!-- Cloud & DevOps -->
-          <div class="skill-card glass-card" data-category="cloud">
+          <div class="skill-card glass-card" data-category="cloud" data-cursor="TECH">
+            <div class="card-crosshairs" aria-hidden="true">
+              <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+              <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+            </div>
             <div class="skill-header">
               <div class="skill-icon-box">☁️</div>
               <div>
-                <h4>Cloud Native & Kubernetes</h4>
-                <span class="skill-years">Production Specialist</span>
+                <h4 data-scramble>Cloud Native & Kubernetes</h4>
+                <span class="skill-years">[ Production Specialist ]</span>
               </div>
             </div>
             <p class="skill-desc">Kubernetes pod clustering, Docker containerization, Helm charts, zero-downtime rolling
@@ -809,69 +940,77 @@
     <section class="section-pad impact-section" id="impact">
       <div class="section-container">
         <div class="section-header">
-          <div class="section-badge">05 // QUANTIFIABLE IMPACT</div>
+          <div class="section-badge" data-scramble>[ 05 // QUANTIFIABLE IMPACT ]</div>
           <h2 class="section-title">Production Scale & <span class="gradient-text">Interactive Live Sim.</span></h2>
           <p class="section-desc">Real-world metrics across 50M+ bKash users, 1.2M+ planted trees, and 10M+ automated conversational AI interactions.</p>
         </div>
 
-        <div class="impact-grid glass-card">
+        <div class="impact-grid glass-card" data-cursor="IMPACT">
+          <div class="card-crosshairs" aria-hidden="true">
+            <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+            <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+          </div>
           <div class="impact-stat-box" data-count="2017">
             <span class="stat-number"><span class="counter-num" data-target="2017">2017</span><span class="accent-mark">→</span></span>
-            <span class="stat-title">Engineering & UX Leadership</span>
+            <span class="stat-title">[ Engineering & UX ]</span>
             <p class="stat-detail">Continuous track record across FinTech, AI, UI/UX Design & Distributed Systems.</p>
           </div>
           <div class="impact-stat-box" data-count="50">
             <span class="stat-number text-red"><span class="counter-num" data-target="50">50</span>M<span class="accent-mark">+</span></span>
-            <span class="stat-title">Active bKash Users</span>
+            <span class="stat-title">[ Active bKash Users ]</span>
             <p class="stat-detail">IDS, G2P EFT, and Self-Service systems serving national volume.</p>
           </div>
           <div class="impact-stat-box" data-count="1.2">
             <span class="stat-number text-crimson"><span class="counter-num" data-target="1.2" data-decimals="1">1.2</span>M<span class="accent-mark">+</span></span>
-            <span class="stat-title">Trees Planted (Forest)</span>
+            <span class="stat-title">[ Trees Planted (Forest) ]</span>
             <p class="stat-detail">Eco-sustainability impact through bKash Forest gamification (Team Lead).</p>
           </div>
           <div class="impact-stat-box" data-count="10">
             <span class="stat-number text-ruby"><span class="counter-num" data-target="10">10</span>M<span class="accent-mark">+</span></span>
-            <span class="stat-title">AI Dialogues (Revora)</span>
+            <span class="stat-title">[ AI Dialogues (Revora) ]</span>
             <p class="stat-detail">Monthly automated conversational interactions handled smoothly.</p>
           </div>
         </div>
 
         <!-- Interactive Live Simulation & Card Popping Station -->
         <div class="interactive-simulator-panel glass-card">
+          <div class="card-crosshairs" aria-hidden="true">
+            <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+            <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+          </div>
           <div class="sim-panel-header">
             <div class="sim-header-left">
               <span class="pulse-dot"></span>
-              <span class="mono-label">LIVE EVENT SIMULATOR · CLICK TO POP TELEMETRY CARDS</span>
+              <span class="mono-label">[ LIVE EVENT SIMULATOR · CLICK TO POP TELEMETRY CARDS ]</span>
             </div>
-            <span class="badge badge-red">GSAP KINETIC PHYSICS</span>
+            <span class="badge badge-red">[ GSAP KINETIC PHYSICS ]</span>
           </div>
           <div class="sim-controls-grid">
-            <button class="sim-btn sim-btn-disburse" id="btnPopDisburse">
+            <button class="sim-btn sim-btn-disburse" id="btnPopDisburse" data-cursor="POP">
               <span class="sim-btn-icon">⚡</span>
               <div class="sim-btn-text">
-                <strong>Pop IDS 5,000 TPS Batch</strong>
+                <strong data-scramble>Pop IDS 5,000 TPS Batch</strong>
                 <small>Simulate instant funds disbursement</small>
               </div>
             </button>
-            <button class="sim-btn sim-btn-forest" id="btnPopForest">
+            <button class="sim-btn sim-btn-forest" id="btnPopForest" data-cursor="POP">
               <span class="sim-btn-icon">🌲</span>
               <div class="sim-btn-text">
-                <strong>Pop bKash Forest Batch</strong>
+                <strong data-scramble>Pop bKash Forest Batch</strong>
                 <small>Simulate +500 verified trees planted</small>
               </div>
             </button>
-            <button class="sim-btn sim-btn-ai" id="btnPopAI">
+            <button class="sim-btn sim-btn-ai" id="btnPopAI" data-cursor="POP">
               <span class="sim-btn-icon">🤖</span>
               <div class="sim-btn-text">
-                <strong>Pop Revora AI Dialogue</strong>
+                <strong data-scramble>Pop Revora AI Dialogue</strong>
                 <small>Simulate NLP WhatsApp intent match</small>
               </div>
             </button>
-            <button class="sim-btn sim-btn-chaos" id="btnPopCascade">
+            <button class="sim-btn sim-btn-chaos" id="btnPopCascade" data-cursor="CASCADE">
               <span class="sim-btn-icon">✨</span>
               <div class="sim-btn-text">
-                <strong>Pop Multi-Card Cascade</strong>
+                <strong data-scramble>Pop Multi-Card Cascade</strong>
                 <small>Launch full 3D card trajectory wave</small>
               </div>
             </button>
@@ -887,8 +1026,12 @@
     <section class="section-pad contact-section" id="contact">
       <div class="section-container">
         <div class="contact-card glass-card">
+          <div class="card-crosshairs" aria-hidden="true">
+            <span class="ch ch-tl">+</span><span class="ch ch-tr">+</span>
+            <span class="ch ch-bl">+</span><span class="ch ch-br">+</span>
+          </div>
           <div class="contact-header">
-            <span class="section-badge">06 // COLLABORATION</span>
+            <span class="section-badge" data-scramble>[ 06 // COLLABORATION ]</span>
             <h2 class="contact-title">Let’s Architect the <br><span class="gradient-text">Next Breakthrough.</span></h2>
             <p class="contact-sub">
               Connect with <strong>Md. Sazzadul Islam (Sazib)</strong> for technical leadership, FinTech architecture
@@ -897,39 +1040,39 @@
           </div>
 
           <div class="contact-actions-grid">
-            <div class="contact-action-box">
+            <div class="contact-action-box" data-cursor="CONTACT">
               <span class="action-icon">✉️</span>
-              <h4>Direct Email</h4>
+              <h4 data-scramble>Direct Email</h4>
               <p>Reach out for tech advisory and engineering discussions</p>
               <div class="contact-btn-group">
-                <button class="btn btn-primary btn-copy" id="copyEmailBtn" data-email="sazib66@gmail.com">
+                <button class="btn btn-primary btn-copy" id="copyEmailBtn" data-email="sazib66@gmail.com" data-cursor="COPY">
                   <span id="copyBtnText">sazib66@gmail.com</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                   </svg>
                 </button>
-                <a href="mailto:sazib66@gmail.com" class="btn btn-outline btn-sm">
+                <a href="mailto:sazib66@gmail.com" class="btn btn-outline btn-sm" data-cursor="OPEN">
                   <span>Open Mail ↗</span>
                 </a>
               </div>
             </div>
 
-            <div class="contact-action-box">
+            <div class="contact-action-box" data-cursor="LINKEDIN">
               <span class="action-icon">💼</span>
-              <h4>LinkedIn & Career</h4>
+              <h4 data-scramble>LinkedIn & Network</h4>
               <p>Connect with professional engineering network</p>
-              <a href="https://www.linkedin.com/in/sazzadsazib?originalSubdomain=bd" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+              <a href="https://www.linkedin.com/in/sazzadsazib?originalSubdomain=bd" target="_blank" rel="noopener noreferrer" class="btn btn-glass" data-cursor="CONNECT">
                 <span>LinkedIn: sazzadsazib ↗</span>
               </a>
             </div>
 
-            <div class="contact-action-box">
+            <div class="contact-action-box" data-cursor="STATUS">
               <span class="action-icon">📍</span>
-              <h4>Location & Presence</h4>
+              <h4 data-scramble>Location & Status</h4>
               <p>Dhaka, Bangladesh · Global Remote / Hybrid</p>
               <div class="location-badge">
-                <span class="pulse-dot"></span> Available UTC+6 (Worldwide Ready)
+                <span class="pulse-dot"></span> [ UTC+6 · READY FOR SCALE ]
               </div>
             </div>
           </div>
